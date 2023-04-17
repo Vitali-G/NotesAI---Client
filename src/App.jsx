@@ -1,12 +1,24 @@
+import { Routes, Route } from "react-router-dom";
+import React from "react";
+import * as Pages from "./pages";
+import Nav from "./layouts/nav";
 import "./App.css";
-import NotesListPage from "./pages/NotesListPage";
-import { NoteProvider } from "./context/index.jsx";
+import { NoteProvider } from "./context";
 
 function App() {
   return (
-    <NoteProvider>
-      <NotesListPage />
-    </NoteProvider>
+    <>
+      <NoteProvider>
+        <Routes>
+          <Route path="/" element={<Nav />}>
+            <Route path="/" element={<Pages.homePage />} />
+            <Route path="/notes" element={<Pages.NotesListPage />} />
+            <Route path="/user" element={<Pages.userPage />} />
+            <Route path="/note" element={<Pages.CreateNotePage />} />
+          </Route>
+        </Routes>
+      </NoteProvider>
+    </>
   );
 }
 

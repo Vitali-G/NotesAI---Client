@@ -1,7 +1,2 @@
-import React from 'react'
-
-export default function index() {
-  return (
-    <div>index</div>
-  )
-}
+export { default as CreateNotePage } from "./createNotePage";
+export { default as NotesListPage } from "./NotesListPage";

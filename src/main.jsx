@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-// import NoteEntry from './modules/NoteEntry'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <App />
-    {/* // putting it here just for testing */}
-    {/* <NoteEntry /> */}
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </>
 );
-
-//</React.StrictMode> was sending a double API request to chatGPT which was confusing

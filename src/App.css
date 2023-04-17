@@ -7,4 +7,5 @@
 body{
   background-color: var(--sea-blue);
   color: white;
+  overflow: hidden;
 }

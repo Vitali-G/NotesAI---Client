@@ -4,7 +4,7 @@ export default function NoteEntry() {
   // getSummary()
 
   return (
-    <>
+    <div id="register-page">
       <h1>NotesAI</h1>
       <h2>Register</h2>
       <form>
@@ -17,6 +17,6 @@ export default function NoteEntry() {
       <p>
         Already have an account? <a href="">Login Here</a>
       </p>
-    </>
+    </div>
   );
 }

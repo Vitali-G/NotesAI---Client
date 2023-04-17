@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-export default function CreateNotePage() {
+export default function homePage() {
     return (
-        <>
-            <div>Hello</div>
+      <>
+        <div>Welcome to Notes Ai</div>
     </>
   )
 }

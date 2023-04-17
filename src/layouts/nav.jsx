@@ -1,15 +1,15 @@
 import React from "react";
-import { Navlink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet } from "react-router-dom";
+
 
 function Nav() {
   return (
       <>
           <nav>
-              <Navlink to = "/"></Navlink>
-              <Navlink to="/notes">Notes</Navlink>
-              <Navlink to="/user">UserName</Navlink>
-              <Navlink to="/">Logout</Navlink>
-              <Navlink to="/note">CreateNotePage</Navlink>
+              <NavLink to = "/" id="logo" className='nav-component'>N<span>otes</span>AI</NavLink>
+              <NavLink to="/notes" className='nav-component'>Notes </NavLink>
+              <NavLink to="/user" className='nav-component'>UserName </NavLink>
+              <NavLink to="/" className='nav-component'><button>Logout</button></NavLink>
           </nav>
           <Outlet/>
       </>

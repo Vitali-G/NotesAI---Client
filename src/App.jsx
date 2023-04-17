@@ -10,9 +10,9 @@ function App() {
     <Routes>
       <Route path='/' element={<Nav />}>
         <Route path="/" element={ <Pages.homePage />}/>
-        <Route path="./notes" element={ <Pages.notesPage />}/>
-        <Route path="./user" element={<Pages.userPage />} />
-        <Route path="./note" element={<Pages.CreateNotePage />} />
+        <Route path="/notes" element={ <Pages.notesPage />}/>
+        <Route path="/user" element={<Pages.userPage />} />
+        <Route path="/note" element={<Pages.createNotePage />} />
       </Route>
     </Routes>
     </>

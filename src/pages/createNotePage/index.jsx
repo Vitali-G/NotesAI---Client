@@ -4,7 +4,7 @@ import NoteEntry from '../../modules/NoteEntry'
 export default function CreateNotePage() {
     return (
       <>
-            <NoteEntry />
-            </>
+          <NoteEntry />
+      </>
   )
 }

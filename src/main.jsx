@@ -5,10 +5,6 @@ import NoteEntry from './modules/NoteEntry'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <>
-    <App /> 
-    {/* // putting it here just for testing */}
-    <NoteEntry />
+    <App />
   </>
 )
-
-//</React.StrictMode> was sending a double API request to chatGPT which was confusing

@@ -1,38 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import text from "../../assets/text"
-// import * as dotenv from 'dotenv';
-// process.config();
-// const KEY = process.env.REACT_APP_chatGPT_KEY;
+import { Configuration, OpenAIApi } from "openai"
+
+const KEY = import.meta.env.VITE_chatGPT_KEY
+const openai = new OpenAIApi(new Configuration({
+    apiKey: KEY
+}))
 
 export default function NoteEntry() {
-    function getSummary() {
-        fetch('https://api.openai.com/v1/engines/davinci/completions', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${KEY}`
-        },
-        body: JSON.stringify({
-            prompt: "What is 2 + 2?",
-            max_tokens: 100
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data.choices[0].text))
-    .catch(error => console.error(error))
+    const [input, setInput] = useState("")
+    const [summary, setSummary] = useState("")
     
-}
+    async function getSummary(input) {
+        const res = await openai.createChatCompletion({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user",
+                        content: `${input}` }]
+        })
+        const data = await res.data.choices[0].message["content"]
+        console.log(data);
+        setSummary(data)
+    
+    }
 
-getSummary()
+    function handleInput(e) {
+        const newInput = e.target.value;
+        setInput(newInput)
+    }
 
-return (
-    <form>
-        <label for="newNote">Prompt:</label>
-        <input id="newNote" type="text" />
-        <button>ASK</button>
-    </form>
-  )
-}
+    function handleSubmit(e) {
+        e.preventDefault()
+        setInput(e.target.value)
+        console.log(e.target.value);
+        getSummary(input)
+    }
 
-// prompt: `Can you please summarise the text below in 3 sentences where the first two sentences are clear and informative, but the third is humorous, in the hope that it will make the summary more memorable for the person reading the summary: ${text}`,
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="newNote">Prompt:</label>
+                <input onChange={handleInput} id="newNote" type="text" placeholder='What?'/>
+                <button>ASK</button>
+            </form>
+            {summary ? <p>{summary}</p> : "" }
+        </>
+    )
+    }
 
+
+    // "Write a limerick about Lewis, Silvia, Erhan and Vitali coding a notes app with built in AI assistance."

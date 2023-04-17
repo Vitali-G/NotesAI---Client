@@ -1,0 +1,19 @@
+
+#home-page{
+    height: 90dvh;
+    width: 100dvw;
+    display: flex;
+    align-items: center;
+    gap: 10%;
+}
+
+#details{
+    height: 60%;
+    flex-basis: 40%;
+}
+
+
+img{
+    height: 40%;
+    flex-basis: 40%;
+}

@@ -23,7 +23,7 @@ export default function NoteEntry() {
     
 }
 
-getSummary()
+// getSummary()
 
 return (
     <form>

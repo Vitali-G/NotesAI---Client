@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNote } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
+import { Link } from "react-router-dom";
 import "./NotesListPage.css";
 
 export default function NotesListPage() {
@@ -47,9 +48,11 @@ export default function NotesListPage() {
       <div className="search-bar">
         {searchInput.map((note) => {
           return (
-            <ul key={note.key} className="note-cards">
-              <Note title={note.title} content={note.content} />
-            </ul>
+            <Link to={`/note/${note.key}`}>
+              <ul key={note.key} className="note-cards">
+                <Note title={note.title} content={note.content} />
+              </ul>
+            </Link>
           );
         })}
       </div>

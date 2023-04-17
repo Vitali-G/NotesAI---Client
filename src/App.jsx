@@ -13,6 +13,7 @@ function App() {
         <Route path="/notes" element={ <Pages.notesPage />}/>
         <Route path="/user" element={<Pages.userPage />} />
         <Route path="/note" element={<Pages.createNotePage />} />
+        <Route path="/register" element={<Pages.registerPage />} />
       </Route>
     </Routes>
     </>

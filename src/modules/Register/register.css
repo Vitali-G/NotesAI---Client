@@ -1,0 +1,44 @@
+:root{
+    --sea-blue: #1D2947;
+    --clementine-orange: #E54B40;
+    --pop-yellow: #F8A826;
+  }
+
+#root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-size: 4rem;
+    margin-bottom: 5rem;
+}
+
+h2{
+    font-size: 2.4rem;
+}
+
+input{
+    display: block;
+    margin-bottom: 1rem;
+    width:25dvw;
+    height: 5dvh;
+    border-radius: 99999px;
+    padding-left: 5%;
+    background-color: rgba(255, 255, 255, 0.562);
+    color: var(--sea-blue);
+}
+
+::placeholder{
+    color: var(--sea-blue);
+}
+
+form button{
+    width: 26.5dvw;
+    height: 5dvh;
+    border-radius: 9999px;
+    background-color: var(--clementine-orange);
+    color: white;
+}

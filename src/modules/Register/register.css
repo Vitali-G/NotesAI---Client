@@ -20,13 +20,21 @@ h2{
     font-size: 2.4rem;
 }
 
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 input{
     display: block;
     margin-bottom: 1rem;
-    width:25dvw;
-    height: 5dvh;
+    width:480px;
+    padding-left: 20px;
+    height: 6dvh;
     border-radius: 99999px;
-    padding-left: 5%;
     background-color: rgba(255, 255, 255, 0.562);
     color: var(--sea-blue);
 }
@@ -36,9 +44,28 @@ input{
 }
 
 form button{
-    width: 26.5dvw;
-    height: 5dvh;
+    width: 500px;
+    height: 6dvh;
     border-radius: 9999px;
     background-color: var(--clementine-orange);
     color: white;
+}
+
+a{
+    text-decoration: none;
+    color: var(--clementine-orange);
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 800px) {
+    input{
+        width: 70%;
+    }
+
+    form button{
+        width: 70%;
+    }
 }

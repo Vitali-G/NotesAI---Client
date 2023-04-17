@@ -1,16 +1,17 @@
 import React from "react";
-import { Navlink, Outelet } from 'react-router-dom'
+import { Navlink, Outlet } from 'react-router-dom'
 
 function Nav() {
   return (
       <>
           <nav>
-              <Navlink to = "./"></Navlink>
-              <Navlink to="./notes">Notes</Navlink>
-              <Navlink to="./user">UserName</Navlink>
-              <Navlink to="./">Logout</Navlink>
+              <Navlink to = "/"></Navlink>
+              <Navlink to="/notes">Notes</Navlink>
+              <Navlink to="/user">UserName</Navlink>
+              <Navlink to="/">Logout</Navlink>
+              <Navlink to="/note">CreateNotePage</Navlink>
           </nav>
-          <Outelet/>
+          <Outlet/>
       </>
   )
 }

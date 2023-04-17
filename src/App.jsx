@@ -7,7 +7,6 @@ import './App.css'
 function App() {
   return (
     <>
-      <Nav/>
     <Routes>
       <Route path='/' element={<Nav />}>
         <Route path="/" element={ <Pages.homePage />}/>
@@ -15,7 +14,7 @@ function App() {
         <Route path="./user" element={<Pages.userPage />} />
         <Route path="./note" element={<Pages.CreateNotePage />} />
       </Route>
-      </Routes>
+    </Routes>
     </>
   )
 }

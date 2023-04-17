@@ -1,0 +1,37 @@
+:root{
+    --sea-blue: #1D2947;
+    --clementine-orange: #E54B40;
+    --pop-yellow: #F8A826;
+  }
+
+nav{
+    width: 100vw;
+    height: 5dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #logo{
+    flex-grow: 1;
+    font-size: 2rem;
+  }
+  
+  nav span{
+    color: white;
+  }
+  
+  .nav-component{
+    margin: 0 5px;
+    color:var(--clementine-orange);
+    text-decoration: none;
+  }
+  
+  nav button{
+    background-color: transparent;
+    color: var(--clementine-orange);
+    border: 1px solid var(--clementine-orange);
+    border-radius: 999px;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+  }

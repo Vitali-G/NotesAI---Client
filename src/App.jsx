@@ -15,6 +15,7 @@ function App() {
             <Route path="/notes" element={<Pages.NotesListPage />} />
             <Route path="/user" element={<Pages.userPage />} />
             <Route path="/note" element={<Pages.CreateNotePage />} />
+            <Route path="/register" element={<Pages.registerPage />} />
           </Route>
         </Routes>
       </NoteProvider>

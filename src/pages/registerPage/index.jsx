@@ -1,12 +1,10 @@
 import React from 'react'
-import Home from '../../modules/Home'
-
-
+import { Register } from '../../modules'
 
 export default function homePage() {
     return (
       <>
-        <Home />
+        <Register />
     </>
   )
 }

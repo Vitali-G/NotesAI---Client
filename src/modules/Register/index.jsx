@@ -35,7 +35,7 @@ export default function Register() {
         body: JSON.stringify({username: username, email: email, password: password}),
       };
 
-      const res = await fetch("localhost:4000/users/register", options)
+      const res = await fetch("http://localhost:4000/users/register", options)
 
       if (res.ok) {
         console.log(`You have successfully signed up ${username}`);

@@ -4,10 +4,10 @@ import { user } from '../../context/index'
 
 
 export default function Login() {
-  const { username, setUsername, password, setPassword } = user()
+  const {email, setEmail, password, setPassword } = user()
 
-  const usernameHandler = (e) => {
-    setUsername(e.target.value)
+  const emailHandler = (e) => {
+    setEmail(e.target.value)
   }
 
   const passwordHandler = (e) => {
@@ -17,24 +17,25 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    const registeruser = async () => {
+    const loginUser = async () => {
 
       const options = {
         method: "POST",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({username: username, password: password}),
+        body: JSON.stringify({email:email, password: password}),
       };
 
-      const res = await fetch("localhost:3000/users/login", options)
+      const res = await fetch("http://localhost:4000/users/login", options)
 
       if (res.ok) {
-        console.log(`You have successfully Logged in ${username}`);
+        console.log(`You have successfully Logged in ${email}`);
         window.location.assign("/notes");
       } else {
         console.log("error in login");
       }
-    } 
+      }
+
+      loginUser();
   }
 
   return (
@@ -42,7 +43,7 @@ export default function Login() {
       <h1>NotesAI</h1>
       <h2>Login</h2>
       <form>
-        <input onChange={usernameHandler} type="text" placeholder="Username" ></input>
+        <input onChange={emailHandler} type="email" placeholder="Email" ></input>
         <input onChange={passwordHandler} type="password" placeholder="Password" ></input>
         <button type="submit" onClick={handleSubmit}>Submit</button>
       </form>

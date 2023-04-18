@@ -42,16 +42,32 @@ export default function NotesListPage() {
 
   return (
     <>
-      <div>Notes List Page</div>
-      <label>Search Your Notes</label>
-      <input type="text" onChange={handleInput}></input>
-      <div className="search-bar">
+      <div className="search-container">
+        <h1 className="notes-title">Notes</h1>
+        <input
+          placeholder="Search for your notes"
+          className="notes-search-bar"
+          type="text"
+          onChange={handleInput}
+        ></input>
+
+        <div className="new-note-btn-container">
+          <p className="btn-lable">New Note</p>
+
+          <Link to="/note">
+            <button className="new-btn">+</button>
+          </Link>
+        </div>
+      </div>
+      <div className="list-container">
         {searchInput.map((note) => {
           return (
             <Link to={`/note/${note.key}`}>
-              <ul key={note.key} className="note-cards">
-                <Note title={note.title} content={note.content} />
-              </ul>
+              <div className="notes-container">
+                <div className="notes-list" key={note.key}>
+                  <Note title={note.title} content={note.content} />
+                </div>
+              </div>
             </Link>
           );
         })}

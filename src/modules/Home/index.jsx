@@ -18,7 +18,7 @@ export default function Home() {
         <button id="try-now">Try Now</button>
         <button id="register">Register</button>
       </div>
-      <img src={homePageImage} alt="" srcset="" />
+      <img src={homePageImage} alt="picture of person looking at notes"/>
     </div>
   );
 }

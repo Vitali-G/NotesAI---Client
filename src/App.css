@@ -1,10 +1,14 @@
-:root{
-  --sea-blue: #1D2947;
-  --clementine-orange: #E54B40;
-  --pop-yellow: #F8A826;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+:root {
+  --sea-blue: #1d2947;
+  --clementine-orange: #e54b40;
+  --pop-yellow: #f8a826;
 }
 
-body{
+body {
   background-color: var(--sea-blue);
   color: white;
+  font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }

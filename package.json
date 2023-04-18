@@ -7,12 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-<<<<<<< HEAD
     "test": "vitest run --reporter verbose",
     "coverage": "vitest run --coverage"
-=======
-    "test": "vitest run --reporter verbose"
->>>>>>> bdda41a97079539572398e1acaa6286d25132035
+
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

@@ -15,8 +15,8 @@ export default function Home() {
           <span>Easy.</span>
         </h1>
         <p>NotesAI is the best place to jot down quick thoughts, or to save longer notes from your classes.</p>
-        <button>Try Now</button>
-        <button>Register</button>
+        <button id="try-now">Try Now</button>
+        <button id="register">Register</button>
       </div>
       <img src={homePageImage} alt="" srcset="" />
     </div>

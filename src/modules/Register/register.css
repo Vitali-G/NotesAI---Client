@@ -4,23 +4,23 @@
     --pop-yellow: #F8A826;
   }
 
-#root{
+#register-page{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-h1{
+#register-page h1{
     font-size: 4rem;
     margin-bottom: 5rem;
 }
 
-h2{
+#register-page h2{
     font-size: 2.4rem;
 }
 
-form{
+#register-page form{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@ form{
     align-items: center;
 }
 
-input{
+#register-page input{
     display: block;
     margin-bottom: 1rem;
     width:480px;
@@ -43,7 +43,7 @@ input{
     color: var(--sea-blue);
 }
 
-form button{
+#register-page form button{
     width: 500px;
     height: 6dvh;
     border-radius: 9999px;
@@ -51,21 +51,21 @@ form button{
     color: white;
 }
 
-a{
+#register-page a{
     text-decoration: none;
     color: var(--clementine-orange);
 }
 
-a:hover{
+#register-page a:hover{
     text-decoration: underline;
 }
 
 @media screen and (max-width: 800px) {
-    input{
+    #register-page input{
         width: 70%;
     }
 
-    form button{
+    #register-page form button{
         width: 70%;
     }
 }

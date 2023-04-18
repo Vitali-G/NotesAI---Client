@@ -9,5 +9,10 @@
 body {
   background-color: var(--sea-blue);
   color: white;
+<<<<<<< HEAD
   font-family: "Roboto", sans-serif;
 }
+=======
+  overflow: hidden;
+}
+>>>>>>> bdda41a97079539572398e1acaa6286d25132035

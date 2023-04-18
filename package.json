@@ -7,15 +7,23 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+<<<<<<< HEAD
     "test": "vitest run --reporter verbose",
     "coverage": "vitest run --coverage"
+=======
+    "test": "vitest run --reporter verbose"
+>>>>>>> bdda41a97079539572398e1acaa6286d25132035
   },
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "matchers": "^0.0.1",
     "openai": "^3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
-    "react-router-dom": "^6.10.0"
+    "react-router-dom": "^6.10.0",
+    "vitest": "^0.30.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

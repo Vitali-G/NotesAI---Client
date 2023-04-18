@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
 export const NoteContext = createContext();
+const UserContext = createContext();
 
 export const NoteProvider = ({ children }) => {
   const [noteContext, setNoteContext] = useState([]);
@@ -12,7 +13,18 @@ export const NoteProvider = ({ children }) => {
   );
 };
 
-export const useNote = () => {
-  const { noteContext, setNoteContext } = useContext(NoteContext);
-  return { noteContext, setNoteContext };
-};
+export const useNote = () => useContext(NoteContext);
+
+export const UserProvider = ({ children }) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+
+  return (
+    <UserContext.Provider value={{ username, setUsername, password, setPassword, email, setEmail }}>
+      {children}
+    </UserContext.Provider>
+  )
+}
+
+export const user = () => useContext(UserContext)

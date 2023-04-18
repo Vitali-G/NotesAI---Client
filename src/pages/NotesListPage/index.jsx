@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNote } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
+import RandomQuiz from "../../modules/RandomQuiz/index.jsx";
 import { Link } from "react-router-dom";
 import "./NotesListPage.css";
 
@@ -43,6 +44,7 @@ export default function NotesListPage() {
   return (
     <>
       <div>Notes List Page</div>
+        <RandomQuiz />
       <label>Search Your Notes</label>
       <input type="text" onChange={handleInput}></input>
       <div className="search-bar">

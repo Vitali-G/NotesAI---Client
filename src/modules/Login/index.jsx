@@ -22,13 +22,13 @@ export default function Login() {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({username: email, password: password}),
+        body: JSON.stringify({email: email, password: password}),
       };
 
       const res = await fetch("http://localhost:4000/users/login", options)
 
       if (res.ok) {
-        console.log(`You have successfully Logged in ${username}`);
+        console.log(`You have successfully Logged in ${email}`);
         window.location.assign("/notes");
       } else {
         console.log("error in login");

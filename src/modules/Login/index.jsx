@@ -21,12 +21,11 @@ export default function Login() {
 
       const options = {
         method: "POST",
-        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({username: username, password: password}),
       };
 
-      const res = await fetch("localhost:3000/users/login", options)
+      const res = await fetch("localhost:4000/users/login", options)
 
       if (res.ok) {
         console.log(`You have successfully Logged in ${username}`);

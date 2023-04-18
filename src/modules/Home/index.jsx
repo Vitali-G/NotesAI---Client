@@ -4,8 +4,9 @@ import './home.css'
 
 
 export default function Home() {
-  // getSummary()
-
+  const registerButtonHandler = () => {
+    window.location.assign("/register");
+  }
   return (
       <div id="home-page">
       <div id="details">
@@ -16,7 +17,7 @@ export default function Home() {
         </h1>
         <p>NotesAI is the best place to jot down quick thoughts, or to save longer notes from your classes.</p>
         <button id="try-now">Try Now</button>
-        <button id="register">Register</button>
+        <button id="register" onClick={registerButtonHandler}>Register</button>
       </div>
       <img src={homePageImage} alt="picture of person looking at notes"/>
     </div>

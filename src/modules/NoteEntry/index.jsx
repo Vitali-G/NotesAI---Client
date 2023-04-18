@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai"
 import "./styles.css"
 import TextEditorBar from '../TextEditorBar'
@@ -7,6 +8,22 @@ const KEY = import.meta.env.VITE_chatGPT_KEY
 const openai = new OpenAIApi(new Configuration({
     apiKey: KEY
 }))
+
+async function postNote(title, summary, input) {
+    const response = await fetch(`http://localhost:3000/note`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            title: {title},
+            summary: {summary},
+            note: {input},
+    })
+    })
+    const rawData = await response.json()
+    const data = rawData.map(s => s.show)
+    }
 
 export default function NoteEntry() {
     const [input, setInput] = useState("")
@@ -28,7 +45,7 @@ export default function NoteEntry() {
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
-                        content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. The note is: ${input}` }]
+                        content: `The student has written a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repetition. Please provide the 3 questions in JSON format with a "question" and corresponding "answer".  The note is: ${input}` }]
         })
         const data = await res.data.choices[0].message["content"]
         setQuestions(data)
@@ -43,23 +60,28 @@ export default function NoteEntry() {
         })
         const data = await res.data.choices[0].message["content"]
         setTitle(data)
-        console.log(title);
     }
 
     function handleInput(e) {
         const newInput = e.target.value;
         setInput(newInput)
     }
+    
+    function handleTitle(e) {
+        const newTitle = e.target.value;
+        setTitle(newTitle)
+    }
 
     function handleSubmit(e) {
         e.preventDefault()
         let noteText = e.target.textContent.replace("SAVE NOTE", "")
-        console.log(noteText);
+        if (!title) {
+            getTitle(noteText)
+        }
         setInput(noteText)
         setSummary(" ")
         getSummary(noteText)
         getQuestions(noteText)
-        getTitle(noteText)
     }
 
     useEffect(() => {
@@ -80,15 +102,15 @@ export default function NoteEntry() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <input type="text" onChange={handleInput} placeholder='Enter note title'/>
+            <form>
+                <input type="text" onChange={handleTitle} placeholder='Enter note title'/>
             </form>
             <TextEditorBar handleRichText={handleRichText} />
             <form onSubmit={handleSubmit}>
                 <div onChange={handleInput} className="content" id="newNote" contentEditable="true"></div>
                 <button >SAVE NOTE</button>
             </form>
-                <button>Back to all notes</button>
+                <button ><Link to="./notes">Back to all notes</Link></button>
             <p>AI Generated summary: </p>
             {!summary ? <p className="summary">(Click SAVE NOTE to generate a summary of your note)</p> : "" }
             {title ? <p className="summary" >{title}</p> : "" }

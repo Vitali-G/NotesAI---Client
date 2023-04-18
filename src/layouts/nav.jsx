@@ -10,10 +10,10 @@ function Nav() {
           N<span>otes</span>AI
         </NavLink>
         <NavLink to="/notes" className="nav-component">
-          Notes{" "}
+          Notes
         </NavLink>
         <NavLink to="/user" className="nav-component">
-          UserName{" "}
+          UserName
         </NavLink>
         <NavLink to="/" className="nav-component">
           <button>Logout</button>

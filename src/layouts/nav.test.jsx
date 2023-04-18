@@ -1,41 +1,39 @@
 import React from "react";
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import { screen, render, cleanup } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
-import { JSDOM } from "jsdom";
-
 expect.extend(matchers);
+import Nav from './nav'
+import { BrowserRouter } from "react-router-dom";
 
-import Nav from "./nav";
-
-describe("Nav", () => {
+describe("register page", () => {
   beforeEach(() => {
-    const dom = new JSDOM();
-    global.document = dom.window.document;
     render(
-      <MemoryRouter>
-        <Nav />
-      </MemoryRouter>
+        <BrowserRouter>
+          <Nav />
+        </BrowserRouter>
     );
   });
 
   afterEach(() => {
     cleanup();
   });
-
-  it("renders the Home link via a logo", () => {
-    const homeLink = screen.getByRole("link", { name: /NotesAI/i });
-    expect(homeLink).toBeInTheDocument();
+    
+  it('renders the notes link', () => {
+    const notesLink = screen.getByRole('link', { name: /Notes/i });
+    expect(notesLink).toBeInTheDocument();
   });
-
-  it("renders the Points link", () => {
-    const pointsLink = screen.getByRole("link", { name: /points/i });
-    expect(pointsLink).toBeInTheDocument();
+    
+  it('renders the username', () => {
+    const userLink = screen.getByRole('link', { name: /UserName/i });
+    expect(userLink).toBeInTheDocument();
   });
-
-  it("renders the Letter link", () => {
-    const letterLink = screen.getByRole("link", { name: /letter/i });
-    expect(letterLink).toBeInTheDocument();
+    
+  it('renders the logout button', () => {
+    const logoutLink = screen.getByRole('button', { name: /Logout/i });
+    expect(logoutLink).toBeInTheDocument();
   });
+    
+    
 });

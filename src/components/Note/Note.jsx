@@ -1,8 +1,8 @@
 const Note = ({ title, content }) => {
   return (
-    <li>
-      <h2>{title}</h2>
-      <p>{content}</p>
+    <li className="note-card">
+      <h2 className="note-title">{title}</h2>
+      <p className="note-content">{content}</p>
     </li>
   );
 };

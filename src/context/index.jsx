@@ -1,6 +1,6 @@
-import React, { useState, useContext, createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
-const NoteContext = createContext();
+export const NoteContext = createContext();
 const UserContext = createContext();
 
 export const NoteProvider = ({ children }) => {

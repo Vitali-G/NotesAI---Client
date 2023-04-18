@@ -9,6 +9,8 @@ export default function NotesListPage() {
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
 
+  console.log("Hello", noteContext);
+
   useEffect(() => {
     const getNotes = async () => {
       try {
@@ -50,10 +52,8 @@ export default function NotesListPage() {
           type="text"
           onChange={handleInput}
         ></input>
-
         <div className="new-note-btn-container">
-          <p className="btn-lable">New Note</p>
-
+          <p className="btn-label">New Note</p>
           <Link to="/note">
             <button className="new-btn">+</button>
           </Link>

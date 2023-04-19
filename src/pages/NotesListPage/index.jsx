@@ -3,6 +3,7 @@ import { page, useNote } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
 import { Link } from "react-router-dom";
 import "./NotesListPage.css";
+import { RandomQuiz } from "../../modules/index.jsx";
 
 export default function NotesListPage() {
   const {setCurrentPage} = page()
@@ -16,13 +17,13 @@ export default function NotesListPage() {
   useEffect(() => {
     const getNotes = async () => {
       try {
-        const response = await fetch("https://swapi.dev/api/films/");
+        const response = await fetch("http://localhost:4000/notes", {credentials: "include"});
         const data = await response.json();
-        const mapNotes = data.results.map((note) => {
+        const mapNotes = data.map((note) => {
           return {
-            key: note.episode_id,
+            key: note.notes_id,
             title: note.title,
-            content: note.opening_crawl,
+            content: note.summary,
           };
         });
         setNoteContext(mapNotes);
@@ -61,6 +62,7 @@ export default function NotesListPage() {
           </Link>
         </div>
       </div>
+      <RandomQuiz />
       <div className="list-container">
         {searchInput.map((note) => {
           return (

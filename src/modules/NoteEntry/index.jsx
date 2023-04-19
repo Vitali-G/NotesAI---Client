@@ -21,8 +21,6 @@ export default function NoteEntry() {
     const [gotSummary, setgotSummary] = useState(false)
 
     async function saveNote(title, input, summary) {
-        console.log("Im here");
-        console.log(`${title}, ${input}, ${summary}`);
         const options = {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
@@ -45,7 +43,7 @@ export default function NoteEntry() {
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
-                        content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. ${input}` }]
+                        content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. If you think there the note is not long enough to provide a meaningful summary, please just return a single line summary and end with "The note is not long enough to provide a meaningful summary. The note is: ${input}` }]
         })
         const data = res.data.choices[0].message["content"]
         setSummary(data)
@@ -112,7 +110,7 @@ export default function NoteEntry() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input type="text" onChange={handleInput} placeholder='Enter note title'/>
             </form>
             <TextEditorBar handleRichText={handleRichText} />
@@ -121,14 +119,14 @@ export default function NoteEntry() {
                 <button type="submit">Save Note</button>
             </form>
                 <Link to="/notes">
-                    <button >Back to all notes</button>
+                    <button>Back to all notes</button>
                 </Link>
             <p>AI Generated summary: </p>
             {!summary ? <p className="summary">(Click SAVE NOTE to generate a summary of your note)</p> : "" }
-            {title ? <p className="summary" >{title}</p> : "" }
             {summary ? <p className="summary" >{summary}</p> : "" }
-            {questions ? <p className="summary" >{questions}</p> : "" }
             {loading ? <><p>LOADING...</p><img className="loading" src="./src/assets/loading2.gif"/></> : ""}
+            {/* {title ? <p className="summary" >{title}</p> : "" } */}
+            {/* {questions ? <p className="summary" >{questions}</p> : "" } */}
         </>
     )
     }

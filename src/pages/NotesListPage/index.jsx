@@ -3,6 +3,7 @@ import { useNote } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
 import { Link } from "react-router-dom";
 import "./NotesListPage.css";
+import { RandomQuiz } from "../../modules/index.jsx";
 
 export default function NotesListPage() {
   const { noteContext, setNoteContext } = useNote();
@@ -59,6 +60,7 @@ export default function NotesListPage() {
           </Link>
         </div>
       </div>
+      <RandomQuiz />
       <div className="list-container">
         {searchInput.map((note) => {
           return (

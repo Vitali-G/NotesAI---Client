@@ -52,7 +52,7 @@ export default function NoteEntry() {
             messages: [{ role: "user",
                         content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. The note is: ${input}` }]
         })
-        const data = await res.data.choices[0].message["content"]
+        const data = res.data.choices[0].message["content"]
         setQuestions(data)
         console.log(questions);
     }
@@ -63,21 +63,23 @@ export default function NoteEntry() {
             messages: [{ role: "user",
                         content: `A student has written a note, most likely from a new subject they are learning at school. Generate a 5 word title for the note which most accurately describes the general content of the note. The note is: ${input}` }]
         })
-        const data = await res.data.choices[0].message["content"]
+        const data = res.data.choices[0].message["content"]
         setTitle(data)
+        console.log("title incoming:");
         console.log(title);
     }
 
-    function handleInput(e) {
+    function handleTitle(e) {
         const newInput = e.target.value;
-        setInput(newInput)
+        setTitle(newInput)
     }
 
     function handleSubmit(e) {
-        console.log("handled submit")
+        console.log("Handled submit - remove this log once testings is complete")
         e.preventDefault()
         let noteText = e.target.textContent.replace("Save Note", "")
         setInput(noteText)
+        !title ? getTitle(noteText) : console.log("User entered title, AI doesn't need to generate one, day off!");
         setSummary(" ") // This is so that there is a change to summary and the loading gif plays
         getSummary(noteText)
         // getQuestions(noteText)
@@ -108,11 +110,11 @@ export default function NoteEntry() {
     return (
         <>
             <form>
-                <input type="text" onChange={handleInput} placeholder='Enter note title'/>
+                <input type="text" onChange={handleTitle} placeholder='Enter note title'/>
             </form>
             <TextEditorBar handleRichText={handleRichText} />
             <form onSubmit={handleSubmit}>
-                <div onChange={handleInput} className="content" id="newNote" contentEditable="true"></div>
+                <div className="content" id="newNote" contentEditable="true"></div>
                 <button type="submit">Save Note</button>
             </form>
                 <Link to="/notes">

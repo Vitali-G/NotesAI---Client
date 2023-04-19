@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { page, useNote } from "../../context/index.jsx";
+import { page, useNote, user } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
 import { Link } from "react-router-dom";
 import "./NotesListPage.css";
 import { RandomQuiz } from "../../modules/index.jsx";
 
 export default function NotesListPage() {
-  const {setCurrentPage} = page()
+  const {user_id} = user()
+  const {currentPage, setCurrentPage} = page()
   setCurrentPage(window.location.pathname)
   const { noteContext, setNoteContext } = useNote();
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
 
   console.log("Hello", noteContext);
+
 
   useEffect(() => {
     const getNotes = async () => {

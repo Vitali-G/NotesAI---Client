@@ -3,17 +3,9 @@ import React, {useEffect, useState} from "react";
 import * as Pages from "./pages";
 import Nav from "./layouts/nav";
 import "./App.css";
-import { NoteProvider, UserProvider, PageProvider, page } from "./context";
+import { NoteProvider, UserProvider, PageProvider} from "./context";
 
 function App() {
-  const {currentPage} = page
-  const [user_id, setUser_id] = useState("")
-
-  // useEffect(function () {
-  //   if (user) {
-  //     window.location.assign("/");
-  //   }
-  // }, page)
  
 
   return (
@@ -29,7 +21,7 @@ function App() {
             <Route path="/user" element={<Pages.userPage />} />
             <Route path="/note" element={<Pages.CreateNotePage />} />
             <Route path="/register" element={<Pages.registerPage />} />
-            <Route path="/login" element={<Pages.loginPage user_id={user_id} setUser_id={setUser_id} />} />
+            <Route path="/login" element={<Pages.loginPage  />} />
           </Route>
         </Routes>
         </NoteProvider>

@@ -5,7 +5,6 @@ import { page } from "../context";
 
 function Nav() {
   const {currentPage} = page()
-  
 
   return (
     <>
@@ -32,7 +31,7 @@ function Nav() {
         </NavLink>
           </>
         : ""}
-
+      
       <Outlet />
     </>
   );

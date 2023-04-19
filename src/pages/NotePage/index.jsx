@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { page, useNote } from "../../context/index.jsx";
+import { page, useNote, user } from "../../context/index.jsx";
 import { Link, useParams } from "react-router-dom";
 import "./NotePage.css";
 

@@ -5,7 +5,7 @@ import { page, user } from '../../context/index'
 
 export default function Login() {
   const {setCurrentPage} = page()
-  const { email, setEmail, password, setPassword } = user()
+  const { user_id,setUser_id, email, setEmail, password, setPassword } = user()
 
   setCurrentPage(window.location.pathname)
 
@@ -20,8 +20,7 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault()
 
-    const loginUser = async () => {
-
+    const loginUser = () => {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -29,17 +28,22 @@ export default function Login() {
         body: JSON.stringify({email: email, password: password}),
       };
 
-      const res = await fetch("http://localhost:4000/users/login", options)
-      console.log(res.username)
-      if (res.ok) {
-        console.log(`You have successfully Logged in ${email}`);
-        // window.location.assign("/notes");
-      } else {
-        console.log("error in login");
-      }
+      fetch("http://localhost:4000/users/login", options)
+        .then(response => response.json())
+        .then(data => setUser_id(data.userid))
+        .then(window.location.assign("/notes"))
+      
+      
+      
+      // if (res.ok) {
+      //   console.log(`You have successfully Logged in ${email}`);
+      //   // window.location.assign("/notes");
+      // } else {
+      //   console.log("error in login");
+      // }
     }
 
-   loginUser();
+    loginUser();
   }
 
   return (

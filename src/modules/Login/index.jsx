@@ -4,7 +4,9 @@ import { user } from '../../context/index'
 
 
 export default function Login() {
+
   const { email, setEmail, password, setPassword } = user()
+
 
   const emailHandler = (e) => {
     setEmail(e.target.value)
@@ -22,7 +24,9 @@ export default function Login() {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+
         body: JSON.stringify({email: email, password: password}),
+
       };
 
       const res = await fetch("http://localhost:4000/users/login", options)
@@ -33,9 +37,11 @@ export default function Login() {
       } else {
         console.log("error in login");
       }
+
     } 
 
    loginUser();
+
   }
 
   return (

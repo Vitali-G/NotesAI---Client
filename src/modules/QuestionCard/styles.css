@@ -1,0 +1,28 @@
+.question-card {
+    border: 1px solid black;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #555;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .question-card:hover .tooltip {
+    opacity: 1;
+  }

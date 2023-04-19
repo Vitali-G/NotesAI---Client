@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNote } from "../../context/index.jsx";
 import { Link, useParams } from "react-router-dom";
+import { Configuration, OpenAIApi } from "openai"
 import "./NotePage.css";
+
+const KEY = import.meta.env.VITE_chatGPT_KEY
+const openai = new OpenAIApi(new Configuration({
+    apiKey: KEY
+}))
 
 function NotePage() {
   const { id } = useParams();
@@ -9,6 +15,8 @@ function NotePage() {
   const [note, setNote] = useState({});
   const [loading, setLoading] = useState(false);
   const [highlighted, setHighlighted] = useState("")
+  const [explanation, setExplanation] = useState("")
+  const [loadingExplanation, setLoadingExplanation] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -19,7 +27,7 @@ function NotePage() {
     setLoading(false);
   }, [id, noteContext]);
 
-  console.log(note.key);
+  // console.log(note.key);
 
   const handleDelete = async () => {
     const options = {
@@ -42,9 +50,18 @@ function NotePage() {
     let text = "";
     text = window.getSelection().toString();
     setHighlighted(text)
-    // return text;
-    console.log(highlighted);
   }
+
+  async function getExplanation() {
+    setLoadingExplanation(true)
+    const res = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
+        messages: [{ role: "user",
+                    content: `A user has written a note but is struggling to understand a word, sentence or concept in the note. The part the user is struggling with is ${highlighted}, and the full context of the note is ${note.content}. Please help the user understand the part they have highlighted as clearly as possible.` }]
+    })
+    const data = res.data.choices[0].message["content"]
+    setExplanation(data)
+}
 
   return (
     <>
@@ -69,7 +86,7 @@ function NotePage() {
         </div>
         <div className="upd-btn-cont">
           <p className="note-btn-label">Explain</p>
-            <button className="note-new-btn">?</button>
+            <button onClick={getExplanation} className="note-new-btn">?</button>
         </div>
       </div>
       <div className="sub-cont">
@@ -77,6 +94,10 @@ function NotePage() {
         <div className="note-page-content">
           <p onMouseUp={getSelectionText}>{note.content}</p>
         </div>
+          <div>
+            {/* {loadingExplanation ? <><p>LOADING...</p><img className="loading" src="../src/assets/loading2.gif"/></> : ""} */}
+            {explanation ? <p className="explanation" >AI explanation of highlighted text: {explanation}</p> : "" }
+          </div>
       </div>
     </>
   );

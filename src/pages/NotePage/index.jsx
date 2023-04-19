@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useNote } from "../../context/index.jsx";
+import { page, useNote } from "../../context/index.jsx";
 import { Link, useParams } from "react-router-dom";
 import "./NotePage.css";
 
 function NotePage() {
+  const {setCurrentPage} = page()
+  setCurrentPage(window.location.pathname)
   const { id } = useParams();
   const { noteContext, setNoteContext } = useNote();
   const [note, setNote] = useState({});

@@ -1,23 +1,20 @@
 import React, {useEffect, useState} from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import "./nav.css";
+import { page } from "../context";
 
 function Nav() {
-  const [page, setPage] = useState("")
-
-  useEffect(function () {
-    setPage(window.location.pathname)
-},)
+  const {currentPage} = page()
   
 
   return (
     <>
       
-      {(page !== "/login" && page !== "/register" && page !== "/") ?<nav>
+      {(currentPage !== "/login" && currentPage !== "/register" && currentPage !== "/") ?<nav>
         <NavLink to="/" id="logo" className="nav-component">
           N<span>otes</span>AI
         </NavLink>
-        {page !== "/notes" ? <NavLink to="/notes" className="nav-component">
+        {currentPage !== "/notes" ? <NavLink to="/notes" className="nav-component">
           Notes
         </NavLink>: ""}
         <NavLink to="/user" className="nav-component">
@@ -28,7 +25,7 @@ function Nav() {
         </NavLink>
       </nav> : ""}
 
-      {page == "/" ?
+      {currentPage == "/" ?
         <>
       <NavLink to="/" id="logo" className="nav-component">
         N<span>otes</span>AI

@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from "react";
 
 export const NoteContext = createContext();
-const UserContext = createContext();
+export const UserContext = createContext();
+export const PageContext = createContext();
 
 export const NoteProvider = ({ children }) => {
   const [noteContext, setNoteContext] = useState([]);
@@ -28,3 +29,15 @@ export const UserProvider = ({ children }) => {
 }
 
 export const user = () => useContext(UserContext)
+
+export const PageProvider = ({ children }) => {
+  const [currentPage, setCurrentPage] = useState("")
+
+  return (
+    <PageContext.Provider value={{ currentPage, setCurrentPage }}>
+      {children}
+    </PageContext.Provider>
+  )
+}
+
+export const page = () => useContext(PageContext)

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai"
 import TextEditorBar from '../TextEditorBar'
 import "./styles.css"
+import { page } from '../../context';
 
 const KEY = import.meta.env.VITE_chatGPT_KEY
 const openai = new OpenAIApi(new Configuration({
@@ -10,6 +11,8 @@ const openai = new OpenAIApi(new Configuration({
 }))
 
 export default function NoteEntry() {
+    const {setCurrentPage} = page()
+    setCurrentPage(window.location.pathname)
     const [input, setInput] = useState("")
     const [summary, setSummary] = useState("")
     const [loading, setLoading] = useState(true)

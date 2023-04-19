@@ -1,10 +1,12 @@
 import React from "react";
 import homePageImage from '../../assets/undraw_annotation_re_h774_1.png'
 import './home.css'
+import { page } from "../../context/index";
 
 
 export default function Home() {
-
+  const {setCurrentPage} = page()
+  setCurrentPage(window.location.pathname)
   const registerButtonHandler = () => {
     window.location.assign("/register");
   }

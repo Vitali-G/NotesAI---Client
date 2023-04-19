@@ -1,10 +1,13 @@
 import React from "react";
 import "./login.css";
-import { user } from '../../context/index'
+import { page, user } from '../../context/index'
 
 
 export default function Login() {
+  const {setCurrentPage} = page()
   const { email, setEmail, password, setPassword } = user()
+
+  setCurrentPage(window.location.pathname)
 
   const emailHandler = (e) => {
     setEmail(e.target.value)
@@ -27,10 +30,10 @@ export default function Login() {
       };
 
       const res = await fetch("http://localhost:4000/users/login", options)
-
+      console.log(res.username)
       if (res.ok) {
         console.log(`You have successfully Logged in ${email}`);
-        window.location.assign("/notes");
+        // window.location.assign("/notes");
       } else {
         console.log("error in login");
       }

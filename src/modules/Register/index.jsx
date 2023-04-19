@@ -1,10 +1,12 @@
 import React from "react";
 import "./register.css";
 import { useState } from "react";
-import { user } from '../../context/index'
+import { page, user } from '../../context/index'
 
 
 export default function Register() {
+  const {setCurrentPage} = page()
+  setCurrentPage(window.location.pathname)
   const [confirmPassword, setConfirmPassword] = useState("")
   const { username, setUsername, password, setPassword, email, setEmail } = user()
   

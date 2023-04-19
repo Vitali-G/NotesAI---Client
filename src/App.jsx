@@ -15,7 +15,7 @@ function App() {
               <Route path="/" element={<Pages.homePage />} />
               <Route path="/notes" element={<Pages.NotesListPage />} />
               <Route path="/notes/:id" element={<Pages.NotePage />} />
-              <Route path="/user" element={<Pages.userPage />} />
+              {/* <Route path="/user" element={<Pages.userPage />} /> */}
               <Route path="/note" element={<Pages.CreateNotePage />} />
               <Route path="/register" element={<Pages.registerPage />} />
               <Route path="/login" element={<Pages.loginPage />} />

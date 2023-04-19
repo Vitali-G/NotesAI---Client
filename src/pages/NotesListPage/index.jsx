@@ -63,11 +63,11 @@ export default function NotesListPage() {
       </div>
       <RandomQuiz />
       <div className="list-container">
-        {searchInput.map((note) => {
+        {searchInput.map((note, i) => {
           return (
-            <Link to={`/notes/${note.key}`}>
+            <Link to={`/notes/${note.key}`} key={i}>
               <div className="notes-container">
-                <div className="notes-list" key={note.key}>
+                <div className="notes-list">
                   <Note title={note.title} content={note.summary} />
                 </div>
               </div>

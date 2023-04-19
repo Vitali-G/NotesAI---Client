@@ -8,7 +8,7 @@ export default function RandomQuiz() {
   return (
         <div className="threeQuestions">
           <h3>A few personalised quiz questions to help you remember!</h3>
-            {questions.map((question) => <QuestionCard question={question.question} answer={question.answer} />)}
+            {questions.map((question, i) => <QuestionCard question={question.question} answer={question.answer} key={i} />)}
         </div>
   )
 }

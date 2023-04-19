@@ -37,6 +37,12 @@ function NotePage() {
     }
   };
 
+  const handleUpdate = async () => {
+    const noteId = localStorage.setItem("noteId", note.key);
+    const noteTitle = localStorage.setItem("noteTitle", note.title);
+    const noteContent = localStorage.setItem("noteContent", note.content);
+  };
+
   return (
     <>
       <div className="btn-container">
@@ -55,7 +61,9 @@ function NotePage() {
         <div className="upd-btn-cont">
           <p className="note-btn-label">Update</p>
           <Link to="/note">
-            <button className="note-new-btn">U</button>
+            <button onClick={handleUpdate} className="note-new-btn">
+              U
+            </button>
           </Link>
         </div>
       </div>

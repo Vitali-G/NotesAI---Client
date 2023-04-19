@@ -9,18 +9,19 @@ export default function NotesListPage() {
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
 
-  console.log("Hello", noteContext);
-
   useEffect(() => {
     const getNotes = async () => {
       try {
-        const response = await fetch("http://localhost:4000/notes", {credentials: "include"});
+        const response = await fetch("http://localhost:4000/notes", {
+          credentials: "include",
+        });
         const data = await response.json();
         const mapNotes = data.map((note) => {
           return {
             key: note.notes_id,
             title: note.title,
-            content: note.summary,
+            summary: note.summary,
+            content: note.content,
           };
         });
         setNoteContext(mapNotes);
@@ -62,10 +63,10 @@ export default function NotesListPage() {
       <div className="list-container">
         {searchInput.map((note) => {
           return (
-            <Link to={`/note/${note.key}`}>
+            <Link to={`/notes/${note.key}`}>
               <div className="notes-container">
                 <div className="notes-list" key={note.key}>
-                  <Note title={note.title} content={note.content} />
+                  <Note title={note.title} content={note.summary} />
                 </div>
               </div>
             </Link>

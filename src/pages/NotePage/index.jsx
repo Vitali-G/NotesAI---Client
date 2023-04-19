@@ -18,6 +18,25 @@ function NotePage() {
     setLoading(false);
   }, [id, noteContext]);
 
+  console.log(note.key);
+
+  const handleDelete = async () => {
+    const options = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+    };
+
+    const res = await fetch(`http://localhost:4000/notes/${note.key}`, options);
+
+    if (res.ok) {
+      console.log("note deleted");
+      window.location.assign("/notes");
+    } else {
+      console.log("error in deleting note");
+    }
+  };
+
   return (
     <>
       <div className="btn-container">
@@ -29,7 +48,9 @@ function NotePage() {
         </div>
         <div className="del-btn-cont">
           <p className="note-btn-label">Delete</p>
-          <button className="note-new-btn">D</button>
+          <button onClick={handleDelete} className="note-new-btn">
+            D
+          </button>
         </div>
         <div className="upd-btn-cont">
           <p className="note-btn-label">Update</p>

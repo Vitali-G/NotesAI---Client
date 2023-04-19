@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai"
 import TextEditorBar from '../TextEditorBar'
 import "./styles.css"
@@ -116,7 +117,9 @@ export default function NoteEntry() {
                 <div onChange={handleInput} className="content" id="newNote" contentEditable="true"></div>
                 <button type="submit">Save Note</button>
             </form>
-                <button>Back to all notes</button>
+                <Link to="/notes">
+                    <button >Back to all notes</button>
+                </Link>
             <p>AI Generated summary: </p>
             {!summary ? <p className="summary">(Click SAVE NOTE to generate a summary of your note)</p> : "" }
             {title ? <p className="summary" >{title}</p> : "" }

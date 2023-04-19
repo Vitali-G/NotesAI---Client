@@ -54,13 +54,17 @@ function NotePage() {
 
   async function getExplanation() {
     setLoadingExplanation(true)
-    const res = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user",
-                    content: `A user has written a note but is struggling to understand a word, sentence or concept in the note. The part the user is struggling with is ${highlighted}, and the full context of the note is ${note.content}. Please help the user understand the part they have highlighted as clearly as possible.` }]
-    })
-    const data = res.data.choices[0].message["content"]
-    setExplanation(data)
+    if (highlighted) {
+      const res = await openai.createChatCompletion({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user",
+                      content: `A user has written a note but is struggling to understand a word, sentence or concept in the note. The part the user is struggling with is ${highlighted}, and the full context of the note is ${note.content}. Please help the user understand the part they have highlighted as clearly as possible.` }]
+      })
+      const data = res.data.choices[0].message["content"]
+      setExplanation(data)
+    } else {
+      setExplanation("Please highlight some text which you would like our AI to explain! 🤖")
+    }
 }
 
   return (

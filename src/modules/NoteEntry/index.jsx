@@ -107,7 +107,7 @@ export default function NoteEntry() {
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <input type="text" onChange={handleInput} placeholder='Enter note title'/>
             </form>
             <TextEditorBar handleRichText={handleRichText} />

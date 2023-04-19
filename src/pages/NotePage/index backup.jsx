@@ -8,7 +8,6 @@ function NotePage() {
   const { noteContext, setNoteContext } = useNote();
   const [note, setNote] = useState({});
   const [loading, setLoading] = useState(false);
-  const [highlighted, setHighlighted] = useState("")
 
   useEffect(() => {
     setLoading(true);
@@ -38,14 +37,6 @@ function NotePage() {
     }
   };
 
-  function getSelectionText() {
-    let text = "";
-    text = window.getSelection().toString();
-    setHighlighted(text)
-    // return text;
-    console.log(highlighted);
-  }
-
   return (
     <>
       <div className="btn-container">
@@ -67,15 +58,11 @@ function NotePage() {
             <button className="note-new-btn">U</button>
           </Link>
         </div>
-        <div className="upd-btn-cont">
-          <p className="note-btn-label">Explain</p>
-            <button className="note-new-btn">?</button>
-        </div>
       </div>
       <div className="sub-cont">
         <h1 className="note-page-title">{note.title}</h1>
         <div className="note-page-content">
-          <p onMouseUp={getSelectionText}>{note.content}</p>
+          <p>{note.content}</p>
         </div>
       </div>
     </>

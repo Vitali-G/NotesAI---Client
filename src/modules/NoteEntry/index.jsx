@@ -36,7 +36,7 @@ export default function NoteEntry() {
     }
 
     async function getSummary(input) {
-        console.log("ran getsummary")
+        console.log("Ran getSummary")
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
@@ -47,14 +47,15 @@ export default function NoteEntry() {
         setgotSummary(true)
     }
     async function getQuestions(input) {
+        console.log("Ran getQuestions")
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
-                        content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. The note is: ${input}` }]
+                        content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. Ensure that each question has a key of "question" and a corresponding "answer". For example [ { "question": "....?", "answer": "...." } ] The note is: ${input}` }]
         })
         const data = res.data.choices[0].message["content"]
         setQuestions(data)
-        console.log(questions);
+        console.log(data);
     }
 
     async function getTitle(input) {
@@ -65,8 +66,6 @@ export default function NoteEntry() {
         })
         const data = res.data.choices[0].message["content"]
         setTitle(data)
-        console.log("title incoming:");
-        console.log(title);
     }
 
     function handleTitle(e) {
@@ -75,15 +74,13 @@ export default function NoteEntry() {
     }
 
     function handleSubmit(e) {
-        console.log("Handled submit - remove this log once testings is complete")
         e.preventDefault()
         let noteText = e.target.textContent.replace("Save Note", "")
         setInput(noteText)
+        getQuestions(noteText)
         !title ? getTitle(noteText) : console.log("User entered title, AI doesn't need to generate one, day off!");
         setSummary(" ") // This is so that there is a change to summary and the loading gif plays
         getSummary(noteText)
-        // getQuestions(noteText)
-        // getTitle(noteText)
     }
 
     useEffect(() => {
@@ -122,10 +119,8 @@ export default function NoteEntry() {
                 </Link>
             <p>AI Generated summary: </p>
             {!summary ? <p className="summary">(Click SAVE NOTE to generate a summary of your note)</p> : "" }
-            {summary ? <p className="summary" >{summary}</p> : "" }
             {loading ? <><p>LOADING...</p><img className="loading" src="./src/assets/loading2.gif"/></> : ""}
-            {/* {title ? <p className="summary" >{title}</p> : "" } */}
-            {/* {questions ? <p className="summary" >{questions}</p> : "" } */}
+            {/* {summary ? <p className="summary" >{summary}</p> : "" } */}
         </>
     )
     }

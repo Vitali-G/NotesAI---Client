@@ -22,6 +22,7 @@ export default function Login() {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({email: email, password: password}),
       };
 
@@ -33,7 +34,7 @@ export default function Login() {
       } else {
         console.log("error in login");
       }
-    } 
+    }
 
    loginUser();
   }

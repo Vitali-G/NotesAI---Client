@@ -29,20 +29,21 @@ export default function NoteEntry() {
                 summary: summary
             })
         }
-        const response = await fetch(`http://localhost:4000/notes/new`, options)
+        const response = await fetch(`http://localhost:4000/notes/new`, options);
         console.log(response);
         const rawData = await response.json()
         console.log(rawData);
         setgotSummary(false)
     }
-    
+
     async function getSummary(input) {
+        console.log("ran getsummary")
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
                         content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. ${input}` }]
         })
-        const data = await res.data.choices[0].message["content"]
+        const data = res.data.choices[0].message["content"]
         setSummary(data)
         setgotSummary(true)
     }
@@ -74,20 +75,23 @@ export default function NoteEntry() {
     }
 
     function handleSubmit(e) {
+        console.log("handled submit")
         e.preventDefault()
-        let noteText = e.target.textContent.replace("SAVE NOTE", "")
-        console.log(noteText);
+        let noteText = e.target.textContent.replace("Save Note", "")
         setInput(noteText)
         setSummary(" ") // This is so that there is a change to summary and the loading gif plays
         getSummary(noteText)
         // getQuestions(noteText)
         // getTitle(noteText)
-        gotSummary ? saveNote(title, input, summary) : "hello"
     }
 
     useEffect(() => {
         setLoading(!loading)
     }, [summary])
+
+    useEffect(() => {
+        gotSummary ? saveNote(title, input, summary) : "hello"
+    }, [gotSummary])
 
     // function to get the text editor buttons to work
     function handleRichText(e) {
@@ -110,7 +114,7 @@ export default function NoteEntry() {
             <TextEditorBar handleRichText={handleRichText} />
             <form onSubmit={handleSubmit}>
                 <div onChange={handleInput} className="content" id="newNote" contentEditable="true"></div>
-                <button >SAVE NOTE</button>
+                <button type="submit">Save Note</button>
             </form>
                 <button>Back to all notes</button>
             <p>AI Generated summary: </p>

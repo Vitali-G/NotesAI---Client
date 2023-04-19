@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Configuration, OpenAIApi } from "openai"
-import "./styles.css"
 import TextEditorBar from '../TextEditorBar'
+import "./styles.css"
 
 const KEY = import.meta.env.VITE_chatGPT_KEY
 const openai = new OpenAIApi(new Configuration({
@@ -14,6 +14,27 @@ export default function NoteEntry() {
     const [loading, setLoading] = useState(true)
     const [questions, setQuestions] = useState([])
     const [title, setTitle] = useState("")
+    const [gotSummary, setgotSummary] = useState(false)
+
+    async function saveNote(title, input, summary) {
+        console.log("Im here");
+        console.log(`${title}, ${input}, ${summary}`);
+        const options = {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
+            body: JSON.stringify({
+                title: title,
+                content: input,
+                summary: summary
+            })
+        }
+        const response = await fetch(`http://localhost:4000/notes/new`, options)
+        console.log(response);
+        const rawData = await response.json()
+        console.log(rawData);
+        setgotSummary(false)
+    }
     
     async function getSummary(input) {
         const res = await openai.createChatCompletion({
@@ -23,6 +44,7 @@ export default function NoteEntry() {
         })
         const data = await res.data.choices[0].message["content"]
         setSummary(data)
+        setgotSummary(true)
     }
     async function getQuestions(input) {
         const res = await openai.createChatCompletion({
@@ -56,16 +78,18 @@ export default function NoteEntry() {
         let noteText = e.target.textContent.replace("SAVE NOTE", "")
         console.log(noteText);
         setInput(noteText)
-        setSummary(" ")
+        setSummary(" ") // This is so that there is a change to summary and the loading gif plays
         getSummary(noteText)
-        getQuestions(noteText)
-        getTitle(noteText)
+        // getQuestions(noteText)
+        // getTitle(noteText)
+        gotSummary ? saveNote(title, input, summary) : "hello"
     }
 
     useEffect(() => {
         setLoading(!loading)
     }, [summary])
 
+    // function to get the text editor buttons to work
     function handleRichText(e) {
         e.preventDefault()
         const element =  e.target.parentElement

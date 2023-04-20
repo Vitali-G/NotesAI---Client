@@ -4,7 +4,12 @@ import "./nav.css";
 import { page } from "../context";
 
 function Nav() {
-  const {currentPage} = page()
+  const { currentPage } = page()
+  
+  const handleLogout = () => {
+    localStorage.userid = ""
+    window.location.assign("/")
+  }
 
   return (
     <>
@@ -20,7 +25,7 @@ function Nav() {
           UserName
         </NavLink>
         <NavLink to="/" className="nav-component">
-        <button>Logout</button>
+        <button onClick={handleLogout}>Logout</button>
         </NavLink>
       </nav> : ""}
 

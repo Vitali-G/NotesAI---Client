@@ -6,14 +6,13 @@ import "./NotesListPage.css";
 import { RandomQuiz } from "../../modules/index.jsx";
 
 export default function NotesListPage() {
-  const {user_id} = user()
-  const {currentPage, setCurrentPage} = page()
-  setCurrentPage(window.location.pathname)
+  const { user_id } = user();
+  const { currentPage, setCurrentPage } = page();
+  setCurrentPage(window.location.pathname);
   const { noteContext, setNoteContext } = useNote();
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
   const navigate = useNavigate()
-
 
   useEffect(() => {
     const getNotes = async () => {

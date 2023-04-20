@@ -1,6 +1,5 @@
-
 .notes-title {
-  color: #e54b40;
+  color: #f8a826;
   padding: 16px;
   margin-top: 16px;
   position: relative;
@@ -23,8 +22,9 @@
   border-radius: 50px;
   border: none;
   padding: 6px;
-  background-color: rgba(229, 75, 64, 0.5);
+  background-color: rgba(141, 137, 137, 0.34);
   text-align: center;
+  color: #fff;
 }
 
 .new-note-btn-container {
@@ -39,7 +39,7 @@
   width: 30px;
   border-radius: 50%;
   border: none;
-  background-color: #e54b40;
+  background-color: #f8a826;
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -68,8 +68,15 @@
 }
 
 .notes-container {
-  background-color: #7b8190;
+  background-color: #1d2947;
   border-radius: 10px;
+  border: 3px solid #e54b40;
+}
+
+.notes-container:hover {
+  background-color: #e54b40;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.02);
 }
 
 .notes-list {
@@ -77,7 +84,7 @@
 }
 
 .note-title {
-  color: #1d2947;
+  color: #fff;
   padding: 16px;
 }
 
@@ -88,6 +95,6 @@
   line-height: 20px;
 }
 
-input {
+/* input {
   color: #fff;
-}
+} */

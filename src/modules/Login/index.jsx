@@ -1,15 +1,14 @@
 import React from "react";
 import "./login.css";
 
-import { page, user } from '../../context/index'
-
+import { page, user } from "../../context/index";
 
 export default function Login() {
-  const {setCurrentPage} = page()
-  const { user_id,setUser_id, email, setEmail, password, setPassword } = user()
+  const { setCurrentPage } = page();
+  const { user_id, setUser_id, email, setEmail, password, setPassword } =
+    user();
 
-  setCurrentPage(window.location.pathname)
-
+  setCurrentPage(window.location.pathname);
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -22,11 +21,7 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-
-
-
     const loginUser = () => {
-
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -34,13 +29,12 @@ export default function Login() {
         body: JSON.stringify({ email: email, password: password }),
       };
 
-
       fetch("http://localhost:4000/users/login", options)
         .then(response => response.json())
         .then(data => setUser_id(data.userid))
         .then(window.location.assign("/notes"))
-      
-      
+
+
     }
 
     loginUser();

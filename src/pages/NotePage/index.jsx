@@ -77,6 +77,7 @@ function NotePage() {
       })
       const data = res.data.choices[0].message["content"]
       setExplanation(data)
+      setLoadingExplanation(false)
     } else {
       setExplanation("Please highlight some text which you would like our AI to explain! 🤖")
     }
@@ -123,8 +124,8 @@ function NotePage() {
           <p onMouseUp={getSelectionText}>{note.content}</p>
         </div>
           <div>
-            {/* {loadingExplanation ? <><p>LOADING...</p><img className="loading" src="../src/assets/loading2.gif"/></> : ""} */}
-            {explanation ? <p className="explanation" >AI explanation of highlighted text: {explanation}</p> : "" }
+            {loadingExplanation ? <><p>LOADING...</p><img className="loading" src="../src/assets/loading2.gif"/></> : ""}
+            {explanation ? <p className="explanation" >AI explanation of highlighted text: <br/> {explanation}</p> : "" }
           </div>
       </div>
     </>

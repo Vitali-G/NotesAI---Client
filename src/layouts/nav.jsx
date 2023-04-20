@@ -5,8 +5,9 @@ import { page } from "../context";
 
 function Nav() {
   const { currentPage } = page()
-  
-  const handleLogout = () => {
+
+  const handleLogout = async() => {
+    await fetch("http://localhost:4000/users/logout", {credentials: "include"})
     localStorage.userid = ""
     window.location.assign("/")
   }
@@ -24,9 +25,8 @@ function Nav() {
         <NavLink to="/user" className="nav-component">
           UserName
         </NavLink>
-        <NavLink to="/" className="nav-component">
         <button onClick={handleLogout}>Logout</button>
-        </NavLink>
+       
       </nav> : ""}
 
       {currentPage == "/" ?

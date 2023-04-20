@@ -39,10 +39,34 @@ export default function NoteEntry() {
       }),
     };
     const response = await fetch(`http://localhost:4000/notes/new`, options);
-    console.log(response);
     const rawData = await response.json();
-    console.log(rawData);
     setgotSummary(false);
+  }
+
+  async function saveQuestion(question) {
+    console.log(question.question, question.answer);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        question: question.question,
+        answer: question.answer
+      }),
+    };
+    const response = await fetch(`http://localhost:4000/questions/new`, options);
+    const rawData = await response.json();
+    // console.log(rawData);
+  }
+
+  async function saveAllQs(data) {
+    try {
+      for(let question of data) {
+        const res = await saveQuestion(question);
+      } 
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   async function getSummary(input) {
@@ -61,20 +85,6 @@ export default function NoteEntry() {
   }
 
   async function getQuestions(input) {
-    const res = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. Ensure that each question has a key of "question" and a corresponding "answer". For example [ { "question": "....?", "answer": "...." } ] The note is: ${input}`,
-        },
-      ],
-    });
-    const data = res.data.choices[0].message["content"];
-    setQuestions(data);
-  }
-
-  async function getQuestions(input) {
     console.log("Ran getQuestions");
     const res = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -85,9 +95,10 @@ export default function NoteEntry() {
         },
       ],
     });
-    const data = res.data.choices[0].message["content"];
-    setQuestions(data);
-    console.log(data);
+    const rawData = res.data.choices[0].message["content"];
+    setQuestions(rawData);
+    const array = JSON.parse(rawData)
+    saveAllQs(array)
   }
 
   async function getTitle(input) {
@@ -104,11 +115,6 @@ export default function NoteEntry() {
     setTitle(data);
   }
 
-  function handleTitle(e) {
-    const newInput = e.target.value;
-    setTitle(newInput);
-  }
-
   function handleInput(e) {
     const newInput = e.target.value;
     setInput(newInput);
@@ -122,14 +128,10 @@ export default function NoteEntry() {
   function handleSubmit(e) {
     e.preventDefault();
     let noteText = e.target.textContent.replace("Save Note", "");
-    setInput(noteText);
-    !title
-      ? getTitle(noteText)
-      : console.log(
-          "User entered title, AI doesn't need to generate one, day off!"
-        );
     setSummary(" "); // This is so that there is a change to summary and the loading gif plays
+    setInput(noteText);
     getQuestions(noteText);
+    !title ? getTitle(noteText) : console.log("User entered title, AI doesn't need to generate one, day off!");
     getSummary(noteText);
   }
 

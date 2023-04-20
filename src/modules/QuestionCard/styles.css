@@ -1,9 +1,13 @@
 .question-card {
   padding: 10px;
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
+  border: 3px solid #e54b40;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  padding: 0.6rem;
 }
 
 .delete-btn {

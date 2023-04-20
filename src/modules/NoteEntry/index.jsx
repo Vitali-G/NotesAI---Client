@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai";
 import TextEditorBar from "../TextEditorBar";
 import "./styles.css";
@@ -21,6 +21,7 @@ export default function NoteEntry() {
   const [questions, setQuestions] = useState([]);
   const [title, setTitle] = useState("");
   const [gotSummary, setgotSummary] = useState(false);
+  const navigate = useNavigate()
 
   const localId = localStorage.getItem("noteId");
   const localTitle = localStorage.getItem("noteTitle");
@@ -183,6 +184,12 @@ export default function NoteEntry() {
       setInput(localContent);
     }
   }, []);
+  useEffect(() => {
+    if (localStorage.userid === "") {
+      navigate("/login")
+    }
+    console.log(localStorage.userid);
+  }, [localStorage.userid , navigate])
 
   return (
     <>

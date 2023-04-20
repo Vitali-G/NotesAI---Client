@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { page, useNote, user } from "../../context/index.jsx";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai"
 import "./NotePage.css";
 
@@ -19,6 +19,7 @@ function NotePage() {
   const [highlighted, setHighlighted] = useState("")
   const [explanation, setExplanation] = useState("")
   const [loadingExplanation, setLoadingExplanation] = useState(false);
+  const navigate = useNavigate()
 
   useEffect(() => {
     setLoading(true);
@@ -29,6 +30,12 @@ function NotePage() {
     setLoading(false);
   }, [id, noteContext]);
 
+  useEffect(() => {
+    if (localStorage.userid === "") {
+      navigate("/login")
+    }
+    console.log(localStorage.userid);
+  }, [localStorage.userid , navigate])
   // console.log(note.key);
 
   const handleDelete = async () => {
@@ -73,7 +80,13 @@ function NotePage() {
     } else {
       setExplanation("Please highlight some text which you would like our AI to explain! 🤖")
     }
-}
+  }
+  useEffect(() => {
+    if (localStorage.userid === "") {
+      navigate("/login")
+    }
+    console.log(localStorage.userid);
+  }, [localStorage.userid , navigate])
 
 
   return (

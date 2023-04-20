@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./login.css";
 
 import { page, user } from "../../context/index";
@@ -21,7 +21,10 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const loginUser = () => {
+
+
+    const loginUser = async() => {
+
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -29,17 +32,21 @@ export default function Login() {
         body: JSON.stringify({ email: email, password: password }),
       };
 
-      fetch("http://localhost:4000/users/login", options)
-        .then(response => response.json())
-        .then(data => setUser_id(data.userid))
-        .then(window.location.assign("/notes"))
-
-
+      const res = await fetch("http://localhost:4000/users/login", options)
+      const data = await res.json();
+      setUser_id(data.userid)
+      
     }
 
     loginUser();
   }
-
+  useEffect(() => {
+    if (user_id.length > 2) {
+      localStorage.setItem("userid", `${user_id}`)
+      window.location.assign("/notes")
+    }
+  }, [user_id]);
+  
   return (
     <div id="login-page">
       <h1>NotesAI</h1>

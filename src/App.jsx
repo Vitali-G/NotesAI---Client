@@ -4,6 +4,7 @@ import * as Pages from "./pages";
 import Nav from "./layouts/nav";
 import "./App.css";
 import { NoteProvider, UserProvider, PageProvider } from "./context";
+import {page} from "./context/index.jsx"
 
 function App() {
   return (

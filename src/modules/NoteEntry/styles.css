@@ -64,12 +64,15 @@ form{
 }
 
 main .save-note, main .update-note{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-bottom: 1rem;
   border-radius: 9999px;
-  background-color: var(--clementine-orange);
+  background-color: #f8a826;
+  font-size: 20px;
+  border: none;
   color: white;
+  cursor: pointer;
 }
 
 .note-btn-cont{

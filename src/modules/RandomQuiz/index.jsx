@@ -23,6 +23,7 @@ export default function RandomQuiz() {
             setQuestions(randomQuestions);
           }
         } else {
+
           setQuestions([
             {
               question:
@@ -31,6 +32,7 @@ export default function RandomQuiz() {
                 "Write and save some notes to see some AI generated questions to help with your memory",
             },
           ]);
+
         }
       } catch (error) {
         console.log(error);

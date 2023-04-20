@@ -47,6 +47,7 @@ export default function RandomQuiz() {
     <div className="threeQuestions">
       <h3 className="questions-title">Quiz questions to help you remember:</h3>
       <hr />
+      <div className="question-cards">
       {questions.map((question, i) => (
         <QuestionCard
           question={question.question}
@@ -54,8 +55,8 @@ export default function RandomQuiz() {
           key={i}
           id={question.question_id}
           showDelete={showDelete}
-        />
-      ))}
+          />
+      ))}</div>
     </div>
   );
 }

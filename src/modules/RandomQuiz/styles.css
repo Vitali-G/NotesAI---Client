@@ -17,3 +17,9 @@ hr {
   height: 1px;
   border: none;
 }
+
+.question-cards{
+  display: flex;
+  flex-direction: column;
+  
+}

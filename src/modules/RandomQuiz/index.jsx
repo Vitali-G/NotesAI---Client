@@ -13,7 +13,6 @@ export default function RandomQuiz() {
           credentials: "include",
         });
         const data = await response.json();
-        console.log(data);
         if (data.length >= 3) {
           while (randomQuestions.length < 3) {
             const randomIndex = Math.floor(Math.random() * data.length);
@@ -24,7 +23,7 @@ export default function RandomQuiz() {
             setQuestions(randomQuestions)
           }
         } else {
-          setQuestions({"question": "Sorry! Not enough data in your notes to list out 3 questions!", "answer": "Write and save some notes to see some AI generated questions to help with your memory"})
+          setQuestions([{question: "Sorry! Not enough data in your notes to list out 3 questions!", answer: "Write and save some notes to see some AI generated questions to help with your memory"}])
         }
       } catch (error) {
           console.log(error);

@@ -30,10 +30,13 @@ export default function Login() {
       };
 
       fetch("http://localhost:4000/users/login", options)
-        .then((response) => response.json())
-        .then((data) => setUser_id(data.userid))
-        .then(window.location.assign("/notes"));
-    };
+        .then(response => response.json())
+        .then(data => setUser_id(data.userid))
+        .then(window.location.assign("/notes"))
+
+
+    }
+
     loginUser();
   }
 

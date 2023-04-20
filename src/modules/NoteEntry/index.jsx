@@ -59,6 +59,7 @@ export default function NoteEntry() {
     setSummary(data);
     setgotSummary(true);
   }
+
   async function getQuestions(input) {
     console.log("Ran getQuestions");
     const res = await openai.createChatCompletion({
@@ -99,18 +100,20 @@ export default function NoteEntry() {
     setInput(newInput);
   }
 
+  function handleTitle(e) {
+    const newTitle = e.target.value;
+    setTitle(newTitle);
+  }
+
   function handleSubmit(e) {
+    console.log("handled submit");
     e.preventDefault();
     let noteText = e.target.textContent.replace("Save Note", "");
     setInput(noteText);
-    getQuestions(noteText);
-    !title
-      ? getTitle(noteText)
-      : console.log(
-          "User entered title, AI doesn't need to generate one, day off!"
-        );
     setSummary(" "); // This is so that there is a change to summary and the loading gif plays
     getSummary(noteText);
+    getQuestions(noteText);
+    getTitle(noteText);
   }
 
   useEffect(() => {

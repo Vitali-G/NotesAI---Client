@@ -41,7 +41,7 @@ export default function NotesListPage() {
     if (localStorage.userid === "") {
       navigate("/login");
     }
-    console.log(localStorage.userid);
+    // console.log(localStorage.userid);
   }, [localStorage.userid, navigate]);
 
   function handleInput(e) {
@@ -59,7 +59,7 @@ export default function NotesListPage() {
     if (localStorage.userid === "") {
       navigate("/login");
     }
-    console.log(localStorage.userid);
+    // console.log(localStorage.userid);
   }, [localStorage.userid, navigate]);
   return (
     <>

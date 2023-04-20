@@ -39,7 +39,7 @@ function NotePage() {
     if (localStorage.userid === "") {
       navigate("/login");
     }
-    console.log(localStorage.userid);
+    // console.log(localStorage.userid);
   }, [localStorage.userid, navigate]);
   // console.log(note.key);
 

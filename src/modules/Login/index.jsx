@@ -37,7 +37,7 @@ export default function Login() {
     loginUser();
   }
   useEffect(() => {
-    if (user_id.length > 2) {
+    if (user_id) {
       localStorage.setItem("userid", `${user_id}`);
       window.location.assign("/notes");
     }

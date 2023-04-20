@@ -75,7 +75,7 @@ export default function NoteEntry() {
       messages: [
         {
           role: "user",
-          content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. If you think there the note is not long enough to provide a meaningful summary, please just return a single line summary and end with "The note is not long enough to provide a meaningful summary. The note is: ${input}`,
+          content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. If you think there the note is not long enough to provide a meaningful summary, please just return a single line summary and end with "The note is not long enough to provide a meaningful summary. Keep the summary to a maximum of 250 characters please. The note is: ${input}`,
         },
       ],
     });
@@ -256,6 +256,7 @@ export default function NoteEntry() {
       ) : (
         ""
           )}
+      {summary ? <p className="summary" >{summary}</p> : "" }
           </article>
         </div>
     </>

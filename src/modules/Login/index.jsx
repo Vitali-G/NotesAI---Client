@@ -41,8 +41,7 @@ export default function Login() {
         .then(window.location.assign("/notes"))
       
       
-      
-
+    }
 
     loginUser();
   }

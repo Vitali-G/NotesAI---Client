@@ -1,10 +1,39 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { QuestionCard } from "../../modules"
 import "./styles.css"
 
 export default function RandomQuiz() {
-  const [questions, setQuestions] = useState([ { "question": "What are the initial steps for creating a routing system in React?", "answer": "Launch vite, delete un-needed files, create all pages with barebones, create external index.jsx for the pages folder, and export all pages. Then, import all the pages in app and build the routing system.", "level": 1 }, { "question": "What is the purpose of the layouts folder and index.jsx file?", "answer": "To create a parent layout component that can be used for multiple pages and to add navigation styling. The index.jsx file contains a barebones RFC and imports NavLink and styles constant in the header function.", "level": 2 }, { "question": "What React hooks are used when building the showgallery component and why are they used?", "answer": "The hooks used are useEffect, useState, and useParams. useEffect is used to make the API request for shows and to set the loading state. useState is used to store the shows array and to handle changes to the search string. useParams is used for the show page to access the id parameter. ", "level": 3 } ])
+  const [questions, setQuestions] = useState([])
 
+  useEffect(() => {
+    const getQuestions = async () => {
+      const randomQuestions = [];
+      try {
+        const response = await fetch("http://localhost:4000/questions/", {
+          credentials: "include",
+        });
+        const data = await response.json();
+        console.log(data);
+        if (data.length >= 3) {
+          while (randomQuestions.length < 3) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomQuestion = data[randomIndex];
+            if (!randomQuestions.includes(randomQuestion)) {
+              randomQuestions.push(randomQuestion);
+            }
+            setQuestions(randomQuestions)
+          }
+        } else {
+          setQuestions({"question": "Sorry! Not enough data in your notes to list out 3 questions!", "answer": "Write and save some notes to see some AI generated questions to help with your memory"})
+        }
+      } catch (error) {
+          console.log(error);
+        }
+    };
+    getQuestions();
+  }, []);
+
+  //this bit errors when less than 3 questions in database - fix
   return (
         <div className="threeQuestions">
           <h3>A few personalised quiz questions to help you remember!</h3>

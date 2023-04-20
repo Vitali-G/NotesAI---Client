@@ -56,3 +56,24 @@
   position: relative;
   top: 5px;
 }
+
+.explain-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  justify-content: end;
+  width: 50%;
+  margin-top: 25px;
+  margin-left: 25px;
+  padding: 25px;
+}
+
+.explanation {
+  font-size: 18px;
+}
+
+.explanation-detail {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 16px;
+}

@@ -4,18 +4,20 @@ import { screen, render, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 expect.extend(matchers);
-import Register from './index'
-import { UserProvider } from "../../context/index.jsx";
+import Register from "./index";
+import { PageProvider, UserProvider } from "../../context/index.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 describe("register page", () => {
   beforeEach(() => {
     render(
-      <UserProvider>
-        <BrowserRouter>
-          <Register />
-        </BrowserRouter>
-      </UserProvider>
+      <PageProvider>
+        <UserProvider>
+          <BrowserRouter>
+            <Register />
+          </BrowserRouter>
+        </UserProvider>
+      </PageProvider>
     );
   });
 
@@ -32,18 +34,18 @@ describe("register page", () => {
     const heading = screen.getByRole("heading", { name: /Login/i });
     expect(heading).toBeInTheDocument();
   });
-    
-  it('renders an input field for entering the email', () => {
-    const email = screen.queryByPlaceholderText('Email');
+
+  it("renders an input field for entering the email", () => {
+    const email = screen.queryByPlaceholderText("Email");
     expect(email).toBeInTheDocument();
   });
 
-  it('renders an input field for entering the password', () => {
-    const password = screen.queryByPlaceholderText('Password');
+  it("renders an input field for entering the password", () => {
+    const password = screen.queryByPlaceholderText("Password");
     expect(password).toBeInTheDocument();
   });
-    
-  it('renders a sumbit button for registering', () => {
+
+  it("renders a sumbit button for registering", () => {
     const submit = screen.getByRole("button", { name: /Submit/i });
     expect(submit).toBeInTheDocument();
   });

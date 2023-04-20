@@ -72,6 +72,7 @@ function NotePage() {
   }
 
   async function getExplanation() {
+    setQuestions([])
     setLoadingExplanation(true);
     if (highlighted) {
       const res = await openai.createChatCompletion({
@@ -90,6 +91,8 @@ function NotePage() {
   }
 
   async function getQuestions() {
+    setExplanation("")
+    setLoadingExplanation(true);
     const res = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
@@ -102,6 +105,7 @@ function NotePage() {
     const rawData = res.data.choices[0].message["content"];
     const array = JSON.parse(rawData)
     setQuestions(array);
+    setLoadingExplanation(false);
   }
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import { page, user } from "../../context/index";
 
 export default function Login() {
   const { setCurrentPage } = page();
-  const { user_id, setUser_id, email, setEmail, password, setPassword } =
+  const { user_id, setUser_id, email, setEmail, password, setPassword, username, setUsername } =
     user();
 
   setCurrentPage(window.location.pathname);
@@ -32,6 +32,7 @@ export default function Login() {
       const res = await fetch("http://localhost:4000/users/login", options);
       const data = await res.json();
       setUser_id(data.userid);
+      setUsername(data.username);
     };
 
     loginUser();
@@ -39,6 +40,7 @@ export default function Login() {
   useEffect(() => {
     if (user_id) {
       localStorage.setItem("userid", `${user_id}`);
+      localStorage.setItem("username", `${username}`);
       window.location.assign("/notes");
     }
   }, [user_id]);

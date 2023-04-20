@@ -5,17 +5,25 @@ import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 expect.extend(matchers);
 import NotesListPage from "./index.jsx";
-import { NoteProvider } from "../../context/index.jsx";
+import {
+  NoteProvider,
+  PageProvider,
+  UserProvider,
+} from "../../context/index.jsx";
 import { BrowserRouter } from "react-router-dom";
 
 describe("NotesListPage", () => {
   beforeEach(() => {
     render(
-      <NoteProvider>
-        <BrowserRouter>
-          <NotesListPage />
-        </BrowserRouter>
-      </NoteProvider>
+      <PageProvider>
+        <UserProvider>
+          <NoteProvider>
+            <BrowserRouter>
+              <NotesListPage />
+            </BrowserRouter>
+          </NoteProvider>
+        </UserProvider>
+      </PageProvider>
     );
   });
 
@@ -31,5 +39,10 @@ describe("NotesListPage", () => {
   it("renders search bar", () => {
     const searchBar = screen.getByPlaceholderText(/search for your notes/i);
     expect(searchBar).toBeInTheDocument();
+  });
+
+  it('should display a "New Note" button', () => {
+    const newNoteButton = screen.getByText("New Note");
+    expect(newNoteButton).toBeInTheDocument();
   });
 });

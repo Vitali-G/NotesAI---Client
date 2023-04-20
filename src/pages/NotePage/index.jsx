@@ -112,7 +112,7 @@ function NotePage() {
   }, [localStorage.userid, navigate]);
 
   return (
-    <>
+    <div className="main-content">
       <div className="btn-container">
         <div className="new-btn-cont">
           <p className="note-btn-label">New Note</p>
@@ -169,10 +169,10 @@ function NotePage() {
           ) : (
             ""
           )}
-          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i}/>))}</p> : "" }
+          {questions ? <p className="note-page-questions">{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i}/>))}</p> : "" }
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -174,7 +174,7 @@ function NotePage() {
           ) : (
             ""
           )}
-          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</p> : "" }
+          {questions ? <p className="note-page-questions">{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</p> : "" }
         </div>
       </div>
     </div>

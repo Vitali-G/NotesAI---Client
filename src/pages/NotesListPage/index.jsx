@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { page, useNote, user } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import "./NotesListPage.css";
 import { RandomQuiz } from "../../modules/index.jsx";
 
@@ -12,6 +12,7 @@ export default function NotesListPage() {
   const { noteContext, setNoteContext } = useNote();
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
+  const navigate = useNavigate()
 
 
   useEffect(() => {
@@ -36,6 +37,13 @@ export default function NotesListPage() {
     };
     getNotes();
   }, []);
+
+  useEffect(() => {
+    if (localStorage.userid === "") {
+      navigate("/login")
+    }
+    console.log(localStorage.userid);
+  }, [localStorage.userid , navigate])
 
   function handleInput(e) {
     setInputText(e.target.value);

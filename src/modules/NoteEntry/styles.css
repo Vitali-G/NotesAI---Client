@@ -18,7 +18,7 @@
 }
 
 main{
-  flex-basis: 50%;
+  flex-basis: 45%;
   margin-top: 10%;
 }
 form{
@@ -29,8 +29,10 @@ form{
 
 .text-editor-header {
   background-color: #ecf0f1;
-  width: 75%;
+  border-radius: 10px;
+  width: 630px;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   padding: 5px;
 }
 .input-new-note::placeholder{
@@ -55,7 +57,7 @@ form{
   padding: 20px;
   background-color: #7b8190;
   border-radius: 10px;
-  width: 75%;
+  width: 600px;
   font-size: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -97,4 +99,18 @@ main .save-note, main .update-note{
   border: none;
   margin-bottom: 1rem;
   font-size: 2rem;
+}
+
+article{
+  font-size: 1.2rem;
+}
+
+article button{
+  width: 150px;
+  height: 6dvh;
+  margin-bottom: 1rem;
+  border-radius: 9999px;
+  background-color: var(--clementine-orange);
+  background-color: #f8a826;
+  color: white;
 }

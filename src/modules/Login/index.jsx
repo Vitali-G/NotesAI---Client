@@ -21,10 +21,7 @@ export default function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-
-
-    const loginUser = async() => {
-
+    const loginUser = async () => {
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -32,24 +29,25 @@ export default function Login() {
         body: JSON.stringify({ email: email, password: password }),
       };
 
-      const res = await fetch("http://localhost:4000/users/login", options)
+      const res = await fetch("http://localhost:4000/users/login", options);
       const data = await res.json();
-      setUser_id(data.userid)
-      
-    }
+      setUser_id(data.userid);
+    };
 
     loginUser();
   }
   useEffect(() => {
     if (user_id.length > 2) {
-      localStorage.setItem("userid", `${user_id}`)
-      window.location.assign("/notes")
+      localStorage.setItem("userid", `${user_id}`);
+      window.location.assign("/notes");
     }
   }, [user_id]);
-  
+
   return (
     <div id="login-page">
-      <h1>NotesAI</h1>
+      <h1 className="logo-title">
+        N<span className="otes-title">otes</span>AI
+      </h1>
       <h2>Login</h2>
       <form>
         <input onChange={emailHandler} type="email" placeholder="Email"></input>

@@ -44,7 +44,6 @@ export default function NoteEntry() {
   }
 
   async function saveQuestion(question) {
-    console.log(question.question, question.answer);
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -85,7 +84,6 @@ export default function NoteEntry() {
   }
 
   async function getQuestions(input) {
-    console.log("Ran getQuestions");
     const res = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [

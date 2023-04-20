@@ -23,6 +23,7 @@ function NotePage() {
   const [explanation, setExplanation] = useState("");
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [questions, setQuestions] = useState([])
+  const [showDelete, setShowDelete] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -173,7 +174,7 @@ function NotePage() {
           ) : (
             ""
           )}
-          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i}/>))}</p> : "" }
+          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</p> : "" }
         </div>
       </div>
     </>

@@ -23,7 +23,7 @@ function Nav() {
           Notes
         </NavLink>: ""}
         <NavLink className="nav-component">
-          UserName
+          {localStorage.username}
         </NavLink>
         <button onClick={handleLogout}>Logout</button>
        

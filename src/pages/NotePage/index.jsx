@@ -23,6 +23,7 @@ function NotePage() {
   const [explanation, setExplanation] = useState("");
   const [loadingExplanation, setLoadingExplanation] = useState(false);
   const [questions, setQuestions] = useState([])
+  const [showDelete, setShowDelete] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,6 +73,7 @@ function NotePage() {
   }
 
   async function getExplanation() {
+    setQuestions([])
     setLoadingExplanation(true);
     if (highlighted) {
       const res = await openai.createChatCompletion({
@@ -90,6 +92,8 @@ function NotePage() {
   }
 
   async function getQuestions() {
+    setExplanation("")
+    setLoadingExplanation(true);
     const res = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
@@ -102,6 +106,7 @@ function NotePage() {
     const rawData = res.data.choices[0].message["content"];
     const array = JSON.parse(rawData)
     setQuestions(array);
+    setLoadingExplanation(false);
   }
 
   useEffect(() => {
@@ -169,7 +174,7 @@ function NotePage() {
           ) : (
             ""
           )}
-          {questions ? <p className="note-page-questions">{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i}/>))}</p> : "" }
+          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</p> : "" }
         </div>
       </div>
     </div>

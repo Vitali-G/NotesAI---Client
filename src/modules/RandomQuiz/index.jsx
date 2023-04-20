@@ -4,6 +4,7 @@ import "./styles.css";
 
 export default function RandomQuiz() {
   const [questions, setQuestions] = useState([]);
+  const [showDelete, setShowDelete] = useState(true)
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -32,6 +33,7 @@ export default function RandomQuiz() {
                 "Write and save some notes to see some AI generated questions to help with your memory",
             },
           ]);
+          setShowDelete(false)
 
         }
       } catch (error) {
@@ -41,7 +43,6 @@ export default function RandomQuiz() {
     getQuestions();
   }, []);
 
-  //this bit errors when less than 3 questions in database - fix
   return (
     <div className="threeQuestions">
       <h3 className="questions-title">Quiz questions to help you remember:</h3>
@@ -51,6 +52,8 @@ export default function RandomQuiz() {
           question={question.question}
           answer={question.answer}
           key={i}
+          id={question.question_id}
+          showDelete={showDelete}
         />
       ))}
     </div>

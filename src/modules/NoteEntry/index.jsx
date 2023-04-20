@@ -193,7 +193,8 @@ export default function NoteEntry() {
 
   return (
     <>
-      {localId ? <button onClick={updateHandler}>Update Note</button> : ""}
+      <div className="body-lite">
+        <main>
       <form>
         <input
           className="input-new-note"
@@ -203,17 +204,27 @@ export default function NoteEntry() {
           placeholder="Enter note title"
         />
       </form>
-      <TextEditorBar handleRichText={handleRichText} />
+      <TextEditorBar className="text-editor-bar" handleRichText={handleRichText} />
       <form onSubmit={handleSubmit}>
         <textarea
           value={input}
           className="content"
           id="newNote"
           contentEditable="true"
-          onChange={handleInput}
-        ></textarea>
-        <button type="submit">Save Note</button>
-      </form>
+              onChange={handleInput}
+              placeholder="Enter your note here"
+            ></textarea>
+            <div className="note-btn-cont">
+              <p className="note-btn-label">Save Note</p>
+              <button className="save-note" type="submit">S</button>
+              </div>
+          {localId ? <div className="note-btn-cont">
+              <p className="note-btn-label">Update Note</p>
+              <button className="update-note" onClick={updateHandler}>U</button>
+              </div> : ""}
+          </form>
+        </main>
+        <article>
       <Link to="/notes">
         <button>Back to all notes</button>
       </Link>
@@ -232,7 +243,9 @@ export default function NoteEntry() {
         </>
       ) : (
         ""
-      )}
+          )}
+          </article>
+        </div>
     </>
   );
 }

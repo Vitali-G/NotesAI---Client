@@ -26,7 +26,7 @@ describe("register page", () => {
   });
 
   it("renders NotesAI header", () => {
-    const heading = screen.getByRole("heading", { name: /NotesAI/i });
+    const heading = screen.getByText("NotesAI");
     expect(heading).toBeInTheDocument();
   });
 

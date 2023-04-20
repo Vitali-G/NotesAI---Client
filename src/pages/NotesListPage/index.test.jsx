@@ -27,4 +27,9 @@ describe("NotesListPage", () => {
     const heading = screen.getByRole("heading", { name: /notes/i });
     expect(heading).toBeInTheDocument();
   });
+
+  it("renders search bar", () => {
+    const searchBar = screen.getByPlaceholderText(/search for your notes/i);
+    expect(searchBar).toBeInTheDocument();
+  });
 });

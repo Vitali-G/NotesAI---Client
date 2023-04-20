@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { page, useNote, user } from "../../context/index.jsx";
 import Note from "../../components/Note/Note";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NotesListPage.css";
 import { RandomQuiz } from "../../modules/index.jsx";
 
@@ -12,7 +12,7 @@ export default function NotesListPage() {
   const { noteContext, setNoteContext } = useNote();
   const [inputText, setInputText] = useState("");
   const [searchInput, setSearchInput] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getNotes = async () => {
@@ -39,10 +39,10 @@ export default function NotesListPage() {
 
   useEffect(() => {
     if (localStorage.userid === "") {
-      navigate("/login")
+      navigate("/login");
     }
     console.log(localStorage.userid);
-  }, [localStorage.userid , navigate])
+  }, [localStorage.userid, navigate]);
 
   function handleInput(e) {
     setInputText(e.target.value);
@@ -55,13 +55,12 @@ export default function NotesListPage() {
     setSearchInput(filteredNotes);
   }, [inputText, noteContext]);
 
-
   useEffect(() => {
     if (localStorage.userid === "") {
-      navigate("/login")
+      navigate("/login");
     }
     console.log(localStorage.userid);
-  }, [localStorage.userid , navigate])
+  }, [localStorage.userid, navigate]);
   return (
     <>
       <div className="search-container">
@@ -79,7 +78,7 @@ export default function NotesListPage() {
           </Link>
         </div>
       </div>
-      <RandomQuiz />
+      {/* <RandomQuiz /> */}
       <div className="list-container">
         {searchInput.map((note, i) => {
           return (

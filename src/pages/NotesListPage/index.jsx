@@ -55,6 +55,13 @@ export default function NotesListPage() {
     setSearchInput(filteredNotes);
   }, [inputText, noteContext]);
 
+
+  useEffect(() => {
+    if (localStorage.userid === "") {
+      navigate("/login")
+    }
+    console.log(localStorage.userid);
+  }, [localStorage.userid , navigate])
   return (
     <>
       <div className="search-container">

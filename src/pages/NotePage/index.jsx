@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { page, useNote, user } from "../../context/index.jsx";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Configuration, OpenAIApi } from "openai";
+import { QuestionCard } from "../../modules";
 import "./NotePage.css";
 
 const KEY = import.meta.env.VITE_chatGPT_KEY;
@@ -21,6 +22,7 @@ function NotePage() {
   const [highlighted, setHighlighted] = useState("");
   const [explanation, setExplanation] = useState("");
   const [loadingExplanation, setLoadingExplanation] = useState(false);
+  const [questions, setQuestions] = useState([])
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -86,6 +88,22 @@ function NotePage() {
       );
     }
   }
+
+  async function getQuestions() {
+    const res = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {
+          role: "user",
+          content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. Ensure that each question has a key of "question" and a corresponding "answer". For example [ { "question": "....?", "answer": "...." } ] The note is: ${note.content}`,
+        },
+      ],
+    });
+    const rawData = res.data.choices[0].message["content"];
+    const array = JSON.parse(rawData)
+    setQuestions(array);
+  }
+
   useEffect(() => {
     if (localStorage.userid === "") {
       navigate("/login");
@@ -122,6 +140,12 @@ function NotePage() {
             ?
           </button>
         </div>
+        <div className="upd-btn-cont">
+          <p className="note-btn-label">Quiz me</p>
+          <button onClick={getQuestions} className="note-new-btn">
+            3
+          </button>
+        </div>
       </div>
       <div className="sub-cont">
         <h1 className="note-page-title">{note.title}</h1>
@@ -145,6 +169,7 @@ function NotePage() {
           ) : (
             ""
           )}
+          {questions ? <p>{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i}/>))}</p> : "" }
         </div>
       </div>
     </>

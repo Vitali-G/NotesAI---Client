@@ -47,7 +47,6 @@ export default function NoteEntry() {
     }
 
   async function getSummary(input) {
-    console.log("Ran getSummary")
     const res = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: [{ role: "user",
@@ -59,7 +58,6 @@ export default function NoteEntry() {
 }
    
     async function getQuestions(input) {
-        console.log("Ran getQuestions")
         const res = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             messages: [{ role: "user",
@@ -67,7 +65,6 @@ export default function NoteEntry() {
         })
         const data = res.data.choices[0].message["content"]
         setQuestions(data)
-        console.log(data);
     }
 
     async function getTitle(input) {
@@ -97,14 +94,13 @@ export default function NoteEntry() {
   }
 
   function handleSubmit(e) {
-    console.log("handled submit");
     e.preventDefault();
     let noteText = e.target.textContent.replace("Save Note", "");
     setInput(noteText);
+    !title ? getTitle(noteText) : console.log("User entered title, AI doesn't need to generate one, day off!");
     setSummary(" "); // This is so that there is a change to summary and the loading gif plays
-    getSummary(noteText);
     getQuestions(noteText)
-    getTitle(noteText)
+    getSummary(noteText);
   }
 
   useEffect(() => {
@@ -126,34 +122,33 @@ export default function NoteEntry() {
       } else {
           document.execCommand(command, false, null);
       }
-
-   
   }
 
-    const updateHandler = async () => {
-        const options = {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({
-                title: title,
-                content: input,
-            }),
-        };
-        const response = await fetch(
-            `http://localhost:4000/notes/${localId}`,
-            options
-        );
+  const updateHandler = async () => {
+      const options = {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+              title: title,
+              content: input,
+          }),
+      };
+      const response = await fetch(
+          `http://localhost:4000/notes/${localId}`,
+          options
+      );
 
 
-        if (response.ok) {
-            console.log("note updated");
-            localStorage.clear();
-            window.location.assign("/notes");
-        } else {
-            console.log("note not updated");
-        };
-    }
+      if (response.ok) {
+          console.log("note updated");
+          localStorage.clear();
+          window.location.assign("/notes");
+      } else {
+          console.log("note not updated");
+      };
+  }
+
   useEffect(() => {
     if (localId) {
       setTitle(localTitle);
@@ -204,8 +199,6 @@ export default function NoteEntry() {
       ) : (
         ""
       )}
-      {/* {title ? <p className="summary" >{title}</p> : "" } */}
-      {/* {questions ? <p className="summary" >{questions}</p> : "" } */}
     </>
   );
 }

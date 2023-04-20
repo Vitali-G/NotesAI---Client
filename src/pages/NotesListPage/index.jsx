@@ -78,7 +78,7 @@ export default function NotesListPage() {
           </Link>
         </div>
       </div>
-      {/* <RandomQuiz /> */}
+      <RandomQuiz />
       <div className="list-container">
         {searchInput.map((note, i) => {
           return (

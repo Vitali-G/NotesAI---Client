@@ -114,11 +114,6 @@ export default function NoteEntry() {
     setInput(newInput);
   }
 
-  function handleTitle(e) {
-    const newTitle = e.target.value;
-    setTitle(newTitle);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
     let noteText = e.target.textContent.replace("Save Note", "");

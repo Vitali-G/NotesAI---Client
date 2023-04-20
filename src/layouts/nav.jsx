@@ -22,7 +22,7 @@ function Nav() {
         {currentPage !== "/notes" ? <NavLink to="/notes" className="nav-component">
           Notes
         </NavLink>: ""}
-        <NavLink to="/user" className="nav-component">
+        <NavLink className="nav-component">
           UserName
         </NavLink>
         <button onClick={handleLogout}>Logout</button>

@@ -13,7 +13,7 @@ const openai = new OpenAIApi(
 );
 
 export default function NoteEntry() {
-  const { setCurrentPage } = page();
+  const { currentPage, setCurrentPage } = page();
   setCurrentPage(window.location.pathname);
   const [input, setInput] = useState("");
   const [summary, setSummary] = useState("");
@@ -39,10 +39,34 @@ export default function NoteEntry() {
       }),
     };
     const response = await fetch(`http://localhost:4000/notes/new`, options);
-    console.log(response);
     const rawData = await response.json();
-    console.log(rawData);
     setgotSummary(false);
+  }
+
+  async function saveQuestion(question) {
+    console.log(question.question, question.answer);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        question: question.question,
+        answer: question.answer
+      }),
+    };
+    const response = await fetch(`http://localhost:4000/questions/new`, options);
+    const rawData = await response.json();
+    // console.log(rawData);
+  }
+
+  async function saveAllQs(data) {
+    try {
+      for(let question of data) {
+        const res = await saveQuestion(question);
+      } 
+    } catch(err) {
+      console.log(err);
+    }
   }
 
   async function getSummary(input) {
@@ -51,27 +75,13 @@ export default function NoteEntry() {
       messages: [
         {
           role: "user",
-          content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. If you think there the note is not long enough to provide a meaningful summary, please just return a single line summary and end with "The note is not long enough to provide a meaningful summary. The note is: ${input}`,
+          content: `A user needs a summary of a note he is taking. Please write a 3 line summary of the note below. Make the first 2 lines succinct and informative, and make the third one VERY humorous with the hope that it makes the whole summary a lot more memorable. If you think there the note is not long enough to provide a meaningful summary, please just return a single line summary and end with "The note is not long enough to provide a meaningful summary. Keep the summary to a maximum of 250 characters please. The note is: ${input}`,
         },
       ],
     });
     const data = res.data.choices[0].message["content"];
     setSummary(data);
     setgotSummary(true);
-  }
-
-  async function getQuestions(input) {
-    const res = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "user",
-          content: `The student has writen a note to help them remember new content from class. To make it easier to remember as much of the content as possible, use it to generate a set of 3 questions which will be used as prompts to remind the student of his notes using spaced repition. Please provide the 3 questions in JSON format. Ensure that each question has a key of "question" and a corresponding "answer". For example [ { "question": "....?", "answer": "...." } ] The note is: ${input}`,
-        },
-      ],
-    });
-    const data = res.data.choices[0].message["content"];
-    setQuestions(data);
   }
 
   async function getQuestions(input) {
@@ -85,9 +95,10 @@ export default function NoteEntry() {
         },
       ],
     });
-    const data = res.data.choices[0].message["content"];
-    setQuestions(data);
-    console.log(data);
+    const rawData = res.data.choices[0].message["content"];
+    setQuestions(rawData);
+    const array = JSON.parse(rawData)
+    saveAllQs(array)
   }
 
   async function getTitle(input) {
@@ -104,11 +115,6 @@ export default function NoteEntry() {
     setTitle(data);
   }
 
-  function handleTitle(e) {
-    const newInput = e.target.value;
-    setTitle(newInput);
-  }
-
   function handleInput(e) {
     const newInput = e.target.value;
     setInput(newInput);
@@ -122,14 +128,10 @@ export default function NoteEntry() {
   function handleSubmit(e) {
     e.preventDefault();
     let noteText = e.target.textContent.replace("Save Note", "");
-    setInput(noteText);
-    !title
-      ? getTitle(noteText)
-      : console.log(
-          "User entered title, AI doesn't need to generate one, day off!"
-        );
     setSummary(" "); // This is so that there is a change to summary and the loading gif plays
+    setInput(noteText);
     getQuestions(noteText);
+    !title ? getTitle(noteText) : console.log("User entered title, AI doesn't need to generate one, day off!");
     getSummary(noteText);
   }
 
@@ -171,7 +173,9 @@ export default function NoteEntry() {
 
     if (response.ok) {
       console.log("note updated");
-      localStorage.clear();
+      localStorage.noteId = "";
+      localStorage.noteTitle = "";
+      localStorage.noteContent = "";
       window.location.assign("/notes");
     } else {
       console.log("note not updated");
@@ -188,12 +192,21 @@ export default function NoteEntry() {
     if (localStorage.userid === "") {
       navigate("/login")
     }
-    console.log(localStorage.userid);
-  }, [localStorage.userid , navigate])
-
+  }, [localStorage.userid, navigate])
+  
+  useEffect(() => {
+    return () => {
+      if (window.location.pathname !== "/note") {
+        localStorage.noteId = "";
+      localStorage.noteTitle = "";
+      localStorage.noteContent = "";;
+      }
+    };
+  }, [navigate]);
   return (
     <>
-      {localId ? <button onClick={updateHandler}>Update Note</button> : ""}
+      <div className="body-lite">
+        <main>
       <form>
         <input
           className="input-new-note"
@@ -203,17 +216,27 @@ export default function NoteEntry() {
           placeholder="Enter note title"
         />
       </form>
-      <TextEditorBar handleRichText={handleRichText} />
+      <TextEditorBar className="text-editor-bar" handleRichText={handleRichText} />
       <form onSubmit={handleSubmit}>
         <textarea
           value={input}
           className="content"
           id="newNote"
           contentEditable="true"
-          onChange={handleInput}
-        ></textarea>
-        <button type="submit">Save Note</button>
-      </form>
+              onChange={handleInput}
+              placeholder="Enter your note here"
+            ></textarea>
+          {localId ? <div className="note-btn-cont">
+              <p className="note-btn-label">Update Note</p>
+              <button className="update-note" onClick={updateHandler}>U</button>
+            </div> : 
+              <div className="note-btn-cont">
+              <p className="note-btn-label">Save Note</p>
+              <button className="save-note" type="submit">S</button>
+              </div>}
+          </form>
+        </main>
+        <article>
       <Link to="/notes">
         <button>Back to all notes</button>
       </Link>
@@ -232,7 +255,10 @@ export default function NoteEntry() {
         </>
       ) : (
         ""
-      )}
+          )}
+      {summary ? <p className="summary" >{summary}</p> : "" }
+          </article>
+        </div>
     </>
   );
 }

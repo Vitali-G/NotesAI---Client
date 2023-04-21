@@ -239,21 +239,8 @@ export default function NoteEntry() {
         <button>Back to all notes</button>
       </Link>
       <p>AI Generated summary: </p>
-      {!summary ? (
-        <p className="summary">
-          (Click SAVE NOTE to generate a summary of your note)
-        </p>
-      ) : (
-        ""
-      )}
-      {loading ? (
-        <>
-          <p>LOADING...</p>
-          <img className="loading" src="./src/assets/loading2.gif" />
-        </>
-      ) : (
-        ""
-          )}
+      {!summary ? (<p className="summary">(Click SAVE NOTE to generate a summary of your note)</p>) : ""}
+      {loading ? <><p>LOADING...</p><img className="loading" src="./src/assets/loading2.gif" /></> : ""}
       {summary ? <p className="summary" >{summary}</p> : "" }
           </article>
         </div>

@@ -1,0 +1,42 @@
+:root {
+  --sea-blue: #1d2947;
+  --clementine-orange: #e54b40;
+  --pop-yellow: #f8a826;
+}
+
+nav {
+  width: 100vw;
+  height: 5dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 25px;
+}
+
+#logo {
+  flex-grow: 1;
+  font-size: 2.5rem;
+}
+
+.nav-component span {
+  color: white;
+}
+
+.nav-component {
+  margin: 0 20px;
+  color: var(--clementine-orange);
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+nav button {
+  background-color: transparent;
+  color: var(--clementine-orange);
+  border: 1px solid var(--clementine-orange);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  margin-right: 5rem;
+  font-size: 0.8rem;
+}

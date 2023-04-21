@@ -1,0 +1,117 @@
+/* .wrapper-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5%;
+} */
+
+.main-content{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+}
+
+.sub-cont{
+  height: 70dvh;
+  margin-top: 15dvh;
+  flex-basis: 50%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.note-page-title {
+  color: #f8a826;
+  margin-top: 25px;
+  margin-left: 25px;
+  margin-bottom: 2rem;
+}
+
+.note-page-content {
+  background-color: #1d2947;
+  border-radius: 10px;
+  width: 70%;
+  margin-top: 25px;
+  margin-bottom: -1rem;
+  margin-left: 25px;
+  padding: 25px;
+  border: 3px solid #e54b40;
+}
+
+.btn-container {
+  height: 70dvh;
+  margin-top: 10dvh;
+  flex-basis: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.new-btn-cont,
+.del-btn-cont,
+.upd-btn-cont {
+  display: flex;
+  justify-content: end;
+  padding: 15px;
+  margin-right: 10%;
+}
+
+.note-btn-label {
+  margin-right: 10px;
+}
+
+.note-new-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: #f8a826;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.note-btn-label {
+  position: relative;
+  top: 5px;
+}
+
+.explain-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5%;
+  justify-content: end;
+  width: 100%;
+  margin-top: 25px;
+  margin-left: 25px;
+  padding: 25px;
+}
+
+.explanation {
+  font-size: 18px;
+  width: 70%;
+  margin-bottom: 2rem;
+}
+
+.explanation-detail {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 20px;
+}
+
+.note-page-questions .question-card{
+  border: 3px solid #e54b40;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  width: 50%;
+}
+
+.note-page-questions .delete-btn{
+  background-color: #e54b40;
+  color: white;
+}
+
+.note-card {
+  height: 250px;
+}

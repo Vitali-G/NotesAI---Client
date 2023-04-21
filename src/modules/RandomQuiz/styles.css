@@ -1,0 +1,25 @@
+.questions-title {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.threeQuestions {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+hr {
+  width: 50%;
+  margin-bottom: 25px;
+  background-color: #e54b40;
+  height: 1px;
+  border: none;
+}
+
+.question-cards{
+  display: flex;
+  flex-direction: column;
+  
+}

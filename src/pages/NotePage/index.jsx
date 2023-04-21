@@ -73,6 +73,7 @@ function NotePage() {
   }
 
   async function getExplanation() {
+    setExplanation("")
     setQuestions([])
     setLoadingExplanation(true);
     if (highlighted) {
@@ -92,6 +93,7 @@ function NotePage() {
   }
 
   async function getQuestions() {
+    setQuestions([])
     setExplanation("")
     setLoadingExplanation(true);
     const res = await openai.createChatCompletion({
@@ -113,7 +115,7 @@ function NotePage() {
     if (localStorage.userid === "") {
       navigate("/login");
     }
-    console.log(localStorage.userid);
+    // console.log(localStorage.userid);
   }, [localStorage.userid, navigate]);
 
   return (
@@ -174,7 +176,7 @@ function NotePage() {
           ) : (
             ""
           )}
-          {questions ? <p className="note-page-questions">{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</p> : "" }
+          {questions ? <div className="note-page-questions">{questions.map((question, i) => (<QuestionCard question={question.question} answer={question.answer} key={i} showDelete={showDelete}/>))}</div> : "" }
         </div>
       </div>
     </div>
